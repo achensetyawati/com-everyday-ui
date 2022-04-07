@@ -21,7 +21,7 @@ export class Create {
                     this.data = data;
                     data.reference = data.packingList;
                     data._id = undefined
-                    for (var i in data.items){
+                    for (var i of data.items){
                       i._id = 0;
                     }
                     //data.uid = new ObjectId().toString();
