@@ -155,9 +155,11 @@ export class Report {
                 }
                 console.log(this.data.results)
             }
-            this.generateReportHTML();
+            //this.generateReportHTML();
         })
     }
+
+   
 
     generateReportHTML() {
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
