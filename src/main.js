@@ -34,26 +34,20 @@ export async function configure(aurelia) {
       //var auth = "https://bateeq-auth-api-dev.azurewebsites.net/v1";
       // dipakai
       var auth = "https://com-everyday-service-auth-dev.azurewebsites.net/v1/";
-      var core = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
-      var ncore = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
-      var master =
-        "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
-      var manufacture =
-        "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
+      // var core = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
+      // var master = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
+      var master = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
+      var manufacture = "https://com-everyday-service-core-dev.azurewebsites.net/v1/";
       // var inventory ="https://com-bateeq-service-warehouse-dev.azurewebsites.net/v1/";
 
-      var inventory =
-        "https://com-everyday-service-warehouse-dev.azurewebsites.net/v1/";
-      var inventoryAzure =
-        "https://com-bateeq-service-inventory-dev.azurewebsites.net/v1/";
+      var inventory = "https://com-everyday-service-warehouse-dev.azurewebsites.net/v1/";
+      var inventoryAzure = "https://com-bateeq-service-inventory-dev.azurewebsites.net/v1/";
       // var merchandiser ="https://com-bateeq-service-warehouse-dev.azurewebsites.net/v1/";
-      var merchandiser =
-        "https://com-everyday-service-warehouse-dev.azurewebsites.net/v1/";
+      var merchandiser = "https://com-everyday-service-warehouse-dev.azurewebsites.net/v1/";
 
       //var merchandiser = "http://localhost:51011/v1/";
       //var md ="http://localhost:61542/v1/";
-      var md =
-        "https://com-bateeq-service-merchandiser-dev.azurewebsites.net/v1/";
+      var md = "https://com-bateeq-service-merchandiser-dev.azurewebsites.net/v1/";
       // var md = "http://localhost:51011/v1/";
 
       var sales = "https://com-everyday-service-pos-dev.azurewebsites.net/v1/";
@@ -61,53 +55,43 @@ export async function configure(aurelia) {
 
       // var purchasing ="https://com-bateeq-service-warehouse-dev.azurewebsites.net/v1/";
 
-      var purchasing =
-        "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
+      var purchasing = "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
 
       // var purchasingAzure = "https://com-bateeq-service-purchasing-dev.azurewebsites.net/v1/";
-      var purchasingAzure =
-        "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
+      var purchasingAzure = "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
       // var purchasingAzure = "http://localhost:58205/v1/";
 
-      var finance =
-        "https://com-bateeq-service-finance-accounting-dev.azurewebsites.net/v1/";
+      var finance = "https://com-bateeq-service-finance-accounting-dev.azurewebsites.net/v1/";
       //var masterplan ="https://com-bateeq-service-masterplan-dev.azurewebsites.net/v1/";
-      var nmasterplan =
-        "https://com-bateeq-service-sales-dev.azurewebsites.net/v1/";
+      var nmasterplan = "https://com-bateeq-service-sales-dev.azurewebsites.net/v1/";
       var customers = "https://bateeq-api-auth.azurewebsites.net/v1/";
-      var rewardPoints =
-        "https://bateeq-service-voucher-dev.azurewebsites.net/v1/api/";
-      var productBateeqshop =
-        "https://bateeq-service-product-dev.azurewebsites.net/v1/";
+      var rewardPoints = "https://bateeq-service-voucher-dev.azurewebsites.net/v1/api/";
+      var productBateeqshop = "https://bateeq-service-product-dev.azurewebsites.net/v1/";
       var voucher = "https://bateeq-service-voucher-dev.azurewebsites.net/v1/";
-      var generalSetting =
-        "https://bateeq-service-general-dev.azurewebsites.net/v1/generalSetting/";
+      var generalSetting = "https://bateeq-service-general-dev.azurewebsites.net/v1/generalSetting/";
       var authBateeqshop = "https://bateeq-api-auth.azurewebsites.net/v1/";
 
       //var nmerchandiser = "http://localhost:51011/v1/";
       //var nsales = "http://localhost:59451/v1/";
-      var production =
-        "https://com-efrata-service-production-dev.azurewebsites.net/";
+      var production = "https://com-efrata-service-production-dev.azurewebsites.net/";
       // var production = "http://localhost:5005/";
       //purchasingJob
       //var purchasingJob = "http://localhost:57157/v1/";
-      var purchasingJob =
-        "https://com-bateeq-service-purchasingjob-dev.azurewebsites.net/v1/";
+      var purchasingJob = "https://com-bateeq-service-purchasingjob-dev.azurewebsites.net/v1/";
 
-      var nmerchandiser =
-        "https://com-efrata-service-sales-dev.azurewebsites.net/v1/";
+      var nmerchandiser = "https://com-efrata-service-sales-dev.azurewebsites.net/v1/";
       // var nmerchandiser = "http://localhost:63614/v1/";
       var nsales = "https://com-efrata-service-sales-dev.azurewebsites.net/v1/";
       // var nsales = "http://localhost:53247/v1/";
       //purchasingJob
 
-      var purchasingJob =
-        "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
+      var purchasingJob = "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
+
 
       //Config API
       config.registerEndpoint("auth", auth);
-      config.registerEndpoint("core", core);
-      config.registerEndpoint("ncore", ncore);
+      // config.registerEndpoint("core", core);
+      // config.registerEndpoint("master", master);
       config.registerEndpoint("master", master);
       config.registerEndpoint("manufacture", manufacture);
       config.registerEndpoint("inventory", inventory);
