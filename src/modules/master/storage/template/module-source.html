@@ -1,0 +1,19 @@
+<template>
+    <tr>
+        <td >
+            <au-autocomplete
+                value.bind="data.moduleSource"
+                error.bind="error.moduleSource"
+                loader.bind="moduleLoader"
+                read-only.bind="readOnly"
+                placeholder="nama Modul"
+                text.bind="sizeView">
+            </au-autocomplete>
+        </td>
+        
+        <td if.bind="!readOnly" class="bg-light">
+            <button class="btn btn-danger pull-right" click.delegate="onremove(data, $event)">-</button>
+        </td>
+    </tr>
+    
+</template>
