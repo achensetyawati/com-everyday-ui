@@ -57,7 +57,7 @@ class Service extends RestService {
     }
     getGarmentProductsDistinctDescription(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts/distinct-product-description';
 

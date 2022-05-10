@@ -28,7 +28,7 @@ export class Service extends RestService {
 
     getItemByCode(code) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core").client.baseUrl + 'items/finished-goods/code-discount/' + code;
+        var endpoint = config.getEndpoint("master").client.baseUrl + 'items/finished-goods/code-discount/' + code;
         //var endpoint = `${serviceUri}/filter/item/${code}`;
         return super.get(endpoint);
     }
@@ -50,13 +50,13 @@ export class Service extends RestService {
 
     getStorebyCategory(category) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core").client.baseUrl + 'master/stores/category?category=' + category;
+        var endpoint = config.getEndpoint("master").client.baseUrl + 'master/stores/category?category=' + category;
         return super.get(endpoint);
     }
 
     getItemByRo(ro) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core").client.baseUrl + 'items/finished-goods/ro-discount/' + ro;
+        var endpoint = config.getEndpoint("master").client.baseUrl + 'items/finished-goods/ro-discount/' + ro;
         return super.get(endpoint);
     }
 }

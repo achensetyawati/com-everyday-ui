@@ -6,7 +6,7 @@ const resource = 'master/machines';
 module.exports = function (keyword, filter, select) {
 
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("core");
+    var endpoint = config.getEndpoint("master");
     var filterName = {
         "name" : {
             '$regex' : keyword,

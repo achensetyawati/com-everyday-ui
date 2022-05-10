@@ -83,7 +83,7 @@ export class Service extends RestService {
 
 export class ServiceCore extends RestService {
   constructor(http, aggregator, config, endpoint) {
-    super(http, aggregator, config, "core");
+    super(http, aggregator, config, "master");
   }
 
   searchBuyer(info) {

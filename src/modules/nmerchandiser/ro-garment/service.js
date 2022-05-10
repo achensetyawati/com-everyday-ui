@@ -54,7 +54,7 @@ export class Service extends RestService {
 
     getArticleColors() {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core");
+        var endpoint = config.getEndpoint("master");
         var uri = `articles/colors/all`;
         let promise = endpoint.find(uri);
         this.publish(promise)

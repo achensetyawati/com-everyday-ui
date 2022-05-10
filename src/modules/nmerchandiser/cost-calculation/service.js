@@ -69,7 +69,7 @@ class Service extends RestService {
 
     getBuyerBrand(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garment-buyer-brands/byName';
         return endpoint.find(resource, { keyword: keyword, filter: filter })
@@ -79,7 +79,7 @@ class Service extends RestService {
     }
     getGarmentProducts(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts';
         return endpoint.find(resource, { keyword: keyword, filter: filter })
@@ -90,7 +90,7 @@ class Service extends RestService {
 
     getGarmentProductConsts(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts/distinct-product-const';
         return endpoint.find(resource, { keyword: keyword, filter: filter })
@@ -100,7 +100,7 @@ class Service extends RestService {
     }
     getGarmentProductWidths(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts/distinct-product-width';
         return endpoint.find(resource, { keyword: keyword, filter: filter })
@@ -110,7 +110,7 @@ class Service extends RestService {
     }
     getGarmentProductYarns(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts/distinct-product-yarn';
         return endpoint.find(resource, { keyword: keyword, filter: filter })
@@ -121,7 +121,7 @@ class Service extends RestService {
 
     getGarmentProductsDistinctDescription(keyword, filter) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
 
         const resource = 'master/garmentProducts/distinct-product-description';
 

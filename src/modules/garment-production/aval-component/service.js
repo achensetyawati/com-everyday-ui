@@ -57,7 +57,7 @@ class Service extends RestService {
 
 class CoreService extends RestService {
     constructor(http, aggregator, config, endpoint) {
-        super(http, aggregator, config, "ncore");
+        super(http, aggregator, config, "master");
     }
 
     getUom(info) {

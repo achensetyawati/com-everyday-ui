@@ -9,7 +9,7 @@ const categoryServiceUri = 'master/garment-categories';
 export class ServiceCore extends RestService {
 
   constructor(http, aggregator, config) {
-    super(http, aggregator, config, "ncore");
+    super(http, aggregator, config, "master");
   }
 
   getByName(name) {

@@ -7,7 +7,7 @@ const accountBankServiceUri = "master/account-banks";
 export class ServiceCore extends RestService {
 
     constructor(http, aggregator, config, api) {
-        super(http, aggregator, config, "ncore");
+        super(http, aggregator, config, "master");
     }
 
     getBankById(id) {

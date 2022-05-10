@@ -35,7 +35,7 @@ export class Service extends RestService {
 
     getBuyerById(id, select) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("core");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/garment-buyers/${id}`;
 
         return _endpoint.find(_serviceUri)

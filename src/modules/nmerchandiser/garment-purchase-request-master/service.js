@@ -55,7 +55,7 @@ const serviceMasterGarmentSectionUri = 'master/garment-sections';
 
 class CoreService extends RestService {
     constructor(http, aggregator, config) {
-        super(http, aggregator, config, "ncore");
+        super(http, aggregator, config, "master");
     }
 
     search(info) {
