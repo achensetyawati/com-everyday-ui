@@ -33,7 +33,7 @@ export class PurchaseOrderItem {
     if(!this.data.SmallUom && this.data.Product){
       if(this.data.Product.Id){
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
         var productUri=`${resource}/${this.data.Product.Id}`;
         await endpoint.find(productUri)
             .then((result) => {

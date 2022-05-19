@@ -5,6 +5,16 @@ export class DataForm {
   @bindable title;
   @bindable readOnly;
   @bindable selectedUnit;
+
+  controlOptions = {
+    label: {
+        length: 3
+    },
+    control: {
+        length: 5
+    }
+};
+
   formOptions = {
     cancelText: "Kembali",
     saveText: "Simpan",
@@ -24,6 +34,13 @@ export class DataForm {
     this.deleteCallback = this.context.deleteCallback;
     this.editCallback = this.context.editCallback;
     this.saveCallback = this.context.saveCallback;
+    this.Options = {
+        isCreate: this.context.isCreate,
+        isView: this.context.isView,
+        isEdit: this.context.isEdit,
+        checkedAll: this.context.isCreate == true ? false : true,
+        header: this.data
+    }
     if(this.data.unit){
       this.selectedUnit=this.data.unit;
       // if(this.selectedUnit.division){
@@ -60,4 +77,32 @@ export class DataForm {
   unitView = (unit) => {
         return unit.division ?`${unit.division.Name} - ${unit.name}` : `${unit.Division.Name} - ${unit.Name}`
     }
+
+    modulesColumns=[{ header: "Nama Module Source" }]
+
+  get addModuleSources() {
+    return (event) => {
+        this.data.moduleSources.push({});
+    };
+  }
+
+  get removeModuleSources() {
+      return (event) => {
+          this.error = null;
+          //this.updateMeasurements();
+      };
+  }
+
+  get addModuleDestinations() {
+    return (event) => {
+        this.data.moduleDestinations.push({});
+    };
+  }
+
+  get removeModuleDestinations() {
+      return (event) => {
+          this.error = null;
+          //this.updateMeasurements();
+      };
+  }
 } 

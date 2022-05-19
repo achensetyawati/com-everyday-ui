@@ -67,21 +67,21 @@ class Service extends RestService {
 
     getColors() {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core");
+        var endpoint = config.getEndpoint("master");
         var uri = `articles/colors/all`;
         return endpoint.find(uri, {});
     }
 
     getStore(storeCode) {
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("core").client.baseUrl + serviceUriStoreMaster + "/store-storage?code=" + `${storeCode}`
+        var endpoint = config.getEndpoint("master").client.baseUrl + serviceUriStoreMaster + "/store-storage?code=" + `${storeCode}`
         return super.get(endpoint);
     }
 
     getDestinations() {
         var module = 'EFR-PK/PBJ';
         var config = Container.instance.get(Config);
-        var endpoint = config.getEndpoint("ncore");
+        var endpoint = config.getEndpoint("master");
         var uri = `master/storages/destination?keyword=${module}`;
         return endpoint.find(uri);
     }

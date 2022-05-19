@@ -134,7 +134,7 @@ export class Service extends RestService {
 
     getKurs(code, date) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/budget-currencies/by-code?code=${code}&date=${date}`;
 
         return _endpoint.find(_serviceUri)
@@ -145,7 +145,7 @@ export class Service extends RestService {
 
     SmallUom(id) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/garmentProducts/${id}`;
 
         return _endpoint.find(_serviceUri)

@@ -6,7 +6,7 @@ const serviceUri = "articles/seasons";
 
 export class SeasonService extends RestService {
   constructor(http, aggregator, config, api) {
-    super(http, aggregator, config, "core");
+    super(http, aggregator, config, "master");
   }
 
   getSeasonById(id) {

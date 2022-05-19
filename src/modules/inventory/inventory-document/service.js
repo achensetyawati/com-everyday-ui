@@ -38,7 +38,7 @@ export class Service extends RestService {
 
     getStorageById(id, select) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/storages/${id}`;
 
         return _endpoint.find(_serviceUri)
@@ -49,7 +49,7 @@ export class Service extends RestService {
 
     getProductById(id, select) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/products/${id}`;
 
         return _endpoint.find(_serviceUri)
@@ -60,7 +60,7 @@ export class Service extends RestService {
 
     getUomById(id, select) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/uoms/${id}`;
 
         return _endpoint.find(_serviceUri)

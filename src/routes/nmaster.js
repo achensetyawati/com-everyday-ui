@@ -184,5 +184,32 @@ module.exports = [
       //permission: { "C9": 1 },
       iconClass: 'fa fa-dashboard'
   }
+},
+{
+  route: 'master/expeditions',
+  name: 'master/expeditions',
+  moduleId: './modules/master/expedition/index',
+  nav: true,
+  title: 'Master Ekspedisi',
+  auth: true,
+  settings: {
+      group: "nmaster",
+      permission: {"C.01": 1 },
+      //permission: { "C9": 1 },
+      iconClass: 'fa fa-dashboard'
+  }
+},
+{
+  route: "store",
+  name: "store",
+  moduleId: "./modules/master/store/index",
+  nav: true,
+  title: "Store",
+  auth: true,
+  settings: {
+    group: "nmaster",
+    permission: { "*": 1 },
+    iconClass: ""
+  }
 }
 ];

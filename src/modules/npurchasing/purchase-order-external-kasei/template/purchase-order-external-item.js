@@ -59,7 +59,7 @@ export class PurchaseOrderItem {
         return index == self.indexOf(elem);
       })
       var config = Container.instance.get(Config);
-      var endpoint = config.getEndpoint("core");
+      var endpoint = config.getEndpoint("master");
       for(var a of this.data.items){
         a.defaultUom=a.product.uom;
         a.defaultQuantity=a.quantity;

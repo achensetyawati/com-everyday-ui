@@ -6,7 +6,7 @@ const uomServiceUri = 'master/uoms';
 export class ServiceCore extends RestService {
 
   constructor(http, aggregator, config) {
-    super(http, aggregator, config, "core");
+    super(http, aggregator, config, "master");
   }
 
   getById(id) {

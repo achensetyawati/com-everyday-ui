@@ -6,7 +6,7 @@ const resource = 'master/standard-tests';
 module.exports = function (keyword, filter) {
 
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("core");
+    var endpoint = config.getEndpoint("master");
 
     return endpoint.find(resource, { keyword: keyword, filter: JSON.stringify(filter), order: JSON.stringify({}), size: 10 })
         .then(results => {

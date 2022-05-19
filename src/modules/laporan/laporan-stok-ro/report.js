@@ -46,7 +46,7 @@ export class Report {
         }
 
         if (this.productItem) {
-            var image = `${config.getEndpoint("ncore").client.baseUrl}items/finished-goods/${this.productItem._id}`;
+            var image = `${config.getEndpoint("master").client.baseUrl}items/finished-goods/${this.productItem._id}`;
             //var image = `${config.getEndpoint("master").client.baseUrl}items/finished-goods/${this.productItem._id}`;
             this.code = this.productItem.ArticleRealizationOrder ? this.productItem.ArticleRealizationOrder : null;
             this.color = this.productItem.color ? this.productItem.color : null;
