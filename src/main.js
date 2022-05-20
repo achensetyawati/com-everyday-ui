@@ -86,8 +86,6 @@ export async function configure(aurelia) {
       //purchasingJob
 
       var purchasingJob = "https://com-efrata-service-purchasingjob-dev.azurewebsites.net/v1/";
-      var master = "http://localhost:49202/v1/";
-      var inventory = "http://localhost:55627/v1/";
 
       //Config API
       config.registerEndpoint("auth", auth);
