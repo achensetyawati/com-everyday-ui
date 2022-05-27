@@ -79,6 +79,7 @@ export class DataForm {
     }
 
     modulesColumns=[{ header: "Nama Module Source" }]
+    modulesColumnsD=[{ header: "Nama Module Destination" }]
 
   get addModuleSources() {
     return (event) => {

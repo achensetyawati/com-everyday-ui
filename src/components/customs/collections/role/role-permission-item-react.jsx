@@ -26,7 +26,7 @@ export default class RolePermissionItemReact extends React.Component {
     handleUnitChange(event, unit) {
         var value = this.state.value;
         value.unit = unit;
-        value.unitId = unit._id;
+        value.unitId = unit.Id;
         this.handleValueChange(value);
     }
 
@@ -49,7 +49,9 @@ export default class RolePermissionItemReact extends React.Component {
         this.handleValueChange(value);
     }
 
-    handleRemove() {
+    handleRemove(e) {
+        e.preventDefault();
+        
         if (this.props.onRemove)
             this.props.onRemove(this.state.value);
     }
