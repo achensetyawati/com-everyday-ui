@@ -11,8 +11,9 @@
                         value.bind="selectedStorage"
                         label="Storage" 
                         loader.one-time="storageLoader" 
-                        read-only.bind="readOnly"
+                        read-only.bind="readOnly || data.Id"
                         error.bind="error.storage"
+                        text.bind="storageView"
                         options.bind="controlOptions">
                     </au-autocomplete>
 

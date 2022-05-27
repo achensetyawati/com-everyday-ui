@@ -1,5 +1,5 @@
 import { inject, bindable, computedFrom } from 'aurelia-framework';
-var StorageLoader = require('../../../loader/storage-loader');
+var StorageLoader = require('../../../loader/storage-loader-for-store-loader');
 
 export class DataForm {
     @bindable title;
@@ -19,6 +19,10 @@ export class DataForm {
     @computedFrom("data._id")
     get isEdit() {
         return (this.data._id || '').toString() != '';
+    }
+
+    storageView = (storage) => {
+        return storage.name? `${storage.code} - ${storage.name}` :  `${storage.Code} - ${storage.Name}`
     }
 
     get storageLoader(){
