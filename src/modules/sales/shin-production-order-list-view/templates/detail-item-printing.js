@@ -19,7 +19,7 @@ export class DetailItem {
     return (keyword, query) => {
       const resource = 'master/color-types';
       var config = Container.instance.get(Config);
-      var endpoint = config.getEndpoint("core");
+      var endpoint = config.getEndpoint("master");
       return endpoint.find(resource)
         .then(results => {
           return results.data.map(color => {

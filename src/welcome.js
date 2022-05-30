@@ -11,7 +11,7 @@ import { LocalStorage } from './utils/storage';
 
 
 export class Welcome {
-  heading = 'Selamat datang di aplikasi efrata management system';
+  heading = 'Selamat datang di aplikasi everyday management system';
   firstName = 'John';
   lastName = 'Doe';
   previousValue = this.fullName;

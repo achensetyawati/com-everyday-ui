@@ -220,5 +220,18 @@ module.exports = [
       permission: { "*": 1 },
       iconClass: ""
     }
+  },
+  {
+    route: "store",
+    name: "store",
+    moduleId: "./modules/master/store/index",
+    nav: true,
+    title: "Sore",
+    auth: true,
+    settings: {
+      group: "master",
+      permission: { "*": 1 },
+      iconClass: ""
+    }
   }
 ];

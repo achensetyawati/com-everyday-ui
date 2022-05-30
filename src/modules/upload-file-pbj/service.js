@@ -41,7 +41,7 @@ export class Service extends RestService {
   getDestinations() {
     var module = 'EFR-PK/PBJ';
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("ncore");
+    var endpoint = config.getEndpoint("master");
     var uri = `master/storages/destination?keyword=${module}`;
     return endpoint.find(uri);
   }

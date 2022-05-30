@@ -245,7 +245,7 @@ export class Item {
     if (_selectedData) {
       this.data.Comodity = _selectedData;
       var config = Container.instance.get(Config);
-      var endpoint = config.getEndpoint("ncore");
+      var endpoint = config.getEndpoint("master");
       var filter = {
         BuyerCode: this.buyerCode,
         ComodityCode: _selectedData.Code

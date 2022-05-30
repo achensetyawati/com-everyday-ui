@@ -39,7 +39,7 @@ class Service extends RestService {
 const resource = 'master/garment-comodities';
 class CoreService extends RestService {
     constructor(http, aggregator, config, api) {
-        super(http, aggregator, config, "ncore");
+        super(http, aggregator, config, "master");
     }
     getGarmentComodity(info) {
         var endpoint = `${resource}`;

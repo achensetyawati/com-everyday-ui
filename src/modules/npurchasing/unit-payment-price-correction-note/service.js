@@ -45,7 +45,7 @@ export class Service extends RestService {
     }
     getSupplierById(id) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/suppliers/${id}`;
 
         return _endpoint.find(_serviceUri)

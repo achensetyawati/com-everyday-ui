@@ -1,7 +1,7 @@
 import { Container } from 'aurelia-dependency-injection';
 import { Config } from "aurelia-api";
 
-const resource = 'storages';
+const resource = 'master/storages';
 
 module.exports = function (keyword, filter) {
 
