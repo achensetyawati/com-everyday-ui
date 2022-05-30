@@ -10,7 +10,7 @@ const serviceUri = 'master/garment-comodities';
 export class Service extends RestService {
 
     constructor(http, aggregator, config, endpoint) {
-        super(http, aggregator, config, "ncore");
+        super(http, aggregator, config, "master");
     }
 
     search(info) {

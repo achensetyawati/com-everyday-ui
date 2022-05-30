@@ -64,7 +64,7 @@ class SalesService extends RestService {
 const sectionServiceUri = "master/garment-sections";
 class CoreService extends RestService {
     constructor(http, aggregator, config, api) {
-        super(http, aggregator, config, "core");
+        super(http, aggregator, config, "master");
     }
 
     getSectionById(id) {

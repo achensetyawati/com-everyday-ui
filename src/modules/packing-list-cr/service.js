@@ -45,7 +45,7 @@ export class Service extends RestService {
 
   getStorageById(id) {
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("master").client.baseUrl + 'storages/' + id;
+    var endpoint = config.getEndpoint("master").client.baseUrl + 'master/storages/' + id;
     return super.get(endpoint);
   }
 
@@ -53,7 +53,7 @@ export class Service extends RestService {
   getDestinations() {
     var module = 'EFR-PK/PLB';
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("core");
+    var endpoint = config.getEndpoint("master");
     var uri = `master/storages/destination?keyword=${module}`;
     return endpoint.find(uri);
   }
@@ -102,7 +102,7 @@ export class Service extends RestService {
 
   getDataInventory(storageId, itemId) {
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("inventory").client.baseUrl + 'storages/' + storageId + '/inventories/' + itemId;
+    var endpoint = config.getEndpoint("inventory").client.baseUrl + 'master/storages/' + storageId + '/inventories/' + itemId;
     return super.get(endpoint);
   }
 
@@ -113,7 +113,7 @@ export class Service extends RestService {
 
   getSource(name) {
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("master").client.baseUrl + 'storages?keyword=' + name;
+    var endpoint = config.getEndpoint("master").client.baseUrl + 'master/storages?keyword=' + name;
     return super.get(endpoint);
   }
 

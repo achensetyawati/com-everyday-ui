@@ -47,7 +47,7 @@ export class Service extends RestService {
 
     getComodityById(id) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/garment-comodities/${id}`;
 
         return _endpoint.find(_serviceUri)
@@ -69,7 +69,7 @@ export class Service extends RestService {
 
     getAccountBankById(id) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/account-banks/${id}`;
 
         return _endpoint.find(_serviceUri)

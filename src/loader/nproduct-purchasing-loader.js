@@ -6,7 +6,7 @@ const resource = 'master/products';
 module.exports = function (keyword, filter) {
 
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("ncore");
+    var endpoint = config.getEndpoint("master");
 
     if (!filter) {
         filter = {};

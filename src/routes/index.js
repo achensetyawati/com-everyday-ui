@@ -34,7 +34,8 @@ export default [].concat(
   gudangPusatRoutes,
   tokoRoutes,
   finishingRoutes,
-  laporanRoutes
+  laporanRoutes,
+  authRoutes
 );
 
 // export default [].concat(nmasterRoutes, publicRoutes, gudangPusatRoutes, laporanRoutes, reportRoutes, designerRoutes, merchandiserRoutes, finishingRoutes, generalInventoryRoutes, authRoutes, purchaseRoutes, npurchaseRoutes, nmasterplan, expeditionRoutes, accountingRoutes, customersRoutes, generalSettingRoutes, bateeqshopReportRoutes, promotionRoutes, nmerchandiserRoutes, nsalesRoutes, gpurchasingRoutes, garmentproductionRoutes);

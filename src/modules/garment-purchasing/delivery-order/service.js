@@ -52,7 +52,7 @@ export class Service extends RestService {
 
     searchGarmentCategory(info) {
         var config = Container.instance.get(Config);
-        var _endpoint = config.getEndpoint("ncore");
+        var _endpoint = config.getEndpoint("master");
         var _serviceUri = `master/garment-categories`;
         var resultTemp = [];
         return _endpoint.find(_serviceUri, info)

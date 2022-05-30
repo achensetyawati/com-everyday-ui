@@ -6,7 +6,7 @@ const resource = 'master/sizes';
 module.exports = function (keyword, filter) {
 
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("ncore");
+    var endpoint = config.getEndpoint("master");
 
     return endpoint.find(resource, { keyword: keyword, filter: JSON.stringify(filter), size: 50, order: JSON.stringify({ _CreatedUtc: "asc" }) })
         .then(results => {
