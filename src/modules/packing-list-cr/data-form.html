@@ -40,7 +40,7 @@
 
     <!-- <finishedgoods-auto-suggest label="Nama Barang" value.bind="item" class="col-md-5" read-only.bind="readOnly"
       change.delegate="nameChoose($event)"></finishedgoods-auto-suggest> -->
-    <au-autocomplete 
+    <!-- <au-autocomplete 
       value.bind="item" 
       error.bind="error.barcode" 
       label="Barcode"
@@ -51,7 +51,15 @@
       key="item"
       query.bind="filter"
       options.bind="controlOptions">
-    </au-autocomplete>
+    </au-autocomplete> -->
+    <p class="col-md-1">Barcode</p>
+    <input type="text" 
+      focus.bind="hasFocus" 
+      value.bind="item" 
+      class="col-md-3" 
+      aria-placeholder="Barcode" 
+      input.delegate="barcodeChoose($event)">
+    </input>
 
     <numeric label="Total Kuantitas:" read-only.bind="true" value.bind="sumTotalQty" class="col-md-5"></numeric>
     <numeric label="Total Harga:" read-only.bind="true" value.bind="sumPrice" class="col-md-3"></numeric>
