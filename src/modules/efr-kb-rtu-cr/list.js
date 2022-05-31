@@ -49,7 +49,7 @@ export class List {
                 } 
             },
             {
-                field: "_createdDate", title: "Tanggal", formatter: (value, data) => {
+                field: "date", title: "Tanggal", formatter: (value, data) => {
                     return moment(value).locale(locale).format("DD MMMM YYYY");
                 }
             },
@@ -72,6 +72,7 @@ export class List {
         return this.service.search(arg)
             .then(result => {
                 var dataResult = result.data;
+                console.log(result.data);
                 // for(var a of dataResult){
                 //     this.service.getSPKByReference(a.code).then(
                 //         spk => {
