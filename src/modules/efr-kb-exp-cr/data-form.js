@@ -68,4 +68,10 @@ export class DataForm {
         }.bind(this),
         onRemove: function (e) { console.log(e) }.bind(this)
     }
+
+    get removeItems() {
+        return (event) => {
+            this.error = null;
+     };
+    }
 }
