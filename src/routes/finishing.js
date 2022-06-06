@@ -7,9 +7,9 @@ module.exports = [
         title: 'Upload Packing List',
         auth: true,
         settings: {
-            group: "finishing",
+            group: "pemasukan supplier",
             permission: { "FNG.01": 1, "C.01": 1 },
-            iconClass: 'fa fa-bank'
+            iconClass: 'fa fa-clone'
         }
     },
 ]
