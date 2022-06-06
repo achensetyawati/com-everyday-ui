@@ -94,7 +94,6 @@ export class Report {
             destinationCode: this.storage.code || '',
             packingList: this.packingListNo
         }
-        console.log(filter)
         this.service.search(filter).then(spkDocs => {
             var totalQty;
             var totalPrice;
@@ -151,6 +150,7 @@ export class Report {
                     //result.items.push(itemData);
                     result.tanggalRowSpan = tanggalRowSpan;
                     console.log(result);
+                    result.tanggal=moment(result.tanggal).format("DD MMM YYYY") ;
                     this.data.results.push(result);
                 }
                 console.log(this.data.results)
@@ -192,7 +192,7 @@ export class Report {
                     tanggalrowspan++;
                     this.reportHTML += "        <tr>";
                     if (!isItemRowSpan) {
-                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.tanggal.getDate() + " " + months[data.tanggal.getMonth()] + " " + data.tanggal.getFullYear() + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + moment(data.tanggal).format("DD-MM-YYYY") + "</td>";//data.tanggal.getDate() + " " + months[data.tanggal.getMonth()] + " " + data.tanggal.getFullYear() + "</td>";
                         this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.sourceName + "</td>";
                         this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.destinationName + "</td>";
                         this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.transaction + "</td>";
