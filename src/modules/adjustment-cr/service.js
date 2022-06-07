@@ -4,11 +4,12 @@ import { RestService } from '../../utils/rest-service';
 import { Container } from 'aurelia-dependency-injection';
 import { Config } from "aurelia-api"
 
-const serviceUri = 'docs/adjustment';
+const serviceUri = 'adjustment/by-user';
+const serviceItemUri = 'items/finished-goods';
 
 export class Service extends RestService {
 
-  constructor(http, aggregator, config, api) {
+  constructor(http, aggregator, config, endpoint) {
     super(http, aggregator, config, "inventory");
   }
 
@@ -29,18 +30,20 @@ export class Service extends RestService {
 
   getStorage() {
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("master").client.baseUrl + 'storages';
+    var endpoint = config.getEndpoint("master").client.baseUrl + 'master/storage';
     return super.get(endpoint);
   }
 
-  getByCode(code) {
+  getByCode(args) {
     var config = Container.instance.get(Config);
-    var endpoint = config.getEndpoint("master").client.baseUrl + 'items/finished-goods/code/' + code;
+    var endpoint = config.getEndpoint("inventory").client.baseUrl + `inventory/code?itemData=${args.itemData}&source=${args.source}`;
     return super.get(endpoint);
   }
-
-  getDataInventory(storageId, itemId) {
-    var endpoint = 'storages/' + storageId + '/inventories/' + itemId;
+  getDataInventory(args) {
+    var config = Container.instance.get(Config);
+    var endpoint = config.getEndpoint("inventory").client.baseUrl + `inventory/stock?source=${args.source}&itemId=${args.itemData}`;
+    // return super.list(endpoint, args);
+    //var endpoint = `${serviceUri}?itemData=${args.itemData}&source=${args.source}`
     return super.get(endpoint);
   }
 
