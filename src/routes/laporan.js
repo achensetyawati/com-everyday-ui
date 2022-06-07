@@ -86,7 +86,7 @@ module.exports = [
         auth: true,
         settings: {
             group: "laporan",
-            permission: { "GDG.01": 1, "GDG.02": 1, "GDG.03": 1, "GDG.04": 1, "GDG.05": 1 },
+            permission: { "*":1 },
             iconClass: 'fa fa-table'
         }
     },
