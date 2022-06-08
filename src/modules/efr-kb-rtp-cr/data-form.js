@@ -261,6 +261,7 @@ export class DataForm {
         //     }
         // }
         // this.makeTotal(this.data.items);
+
          var barcode = code;
          var quantity = qty;
          this.price = 0;
@@ -269,7 +270,8 @@ export class DataForm {
            // var fg = fgTemp[0];
            // this.price = fg.domesticSale;
            // var newItem = {};
-           var _data = this.data.items.find((item) => item.item.Code === barcode);
+           var _data = this.data.items.find((item) => item.item.code === barcode);
+           console.log(this.data.items);
            if (_data) {
              _data.quantity = parseFloat(quantity);
            }
