@@ -81,7 +81,7 @@
                     value.bind="item.quantity" 
                     max.bind="item.availableQuantity" 
                     min="0"
-                    change.delegate="qtyChange(item.code, item.quantity)" 
+                    change.delegate="qtyChange(item.item.code, item.quantity)" 
                     />
                   <span class="help-block">${error.items[$index].quantity}</span>
                 </td>

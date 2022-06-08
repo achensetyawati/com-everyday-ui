@@ -1,137 +1,173 @@
 import { inject, bindable } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { Service } from './service';
-var SourceLoader = require('../../loader/storage-loader');
+var SourceLoader = require('../../loader/nstorage-loader');
 
 @inject(Router, Service)
 export class DataForm {
     @bindable data = {};
     @bindable error = {};
-    sources = [];
+    Type = ["IN", "OUT"];
     hasFocus = true;
+    
+
+    controlOptions = {
+        // label: {
+        //     length: 4
+        // },
+        control: {
+            length: 12
+        }
+    }
+
+    auInputOptions = {
+        label: {
+            length: 4,
+            align: "right"
+        },
+        control: {
+            length: 5
+        }
+    };
+
     constructor(router, service) {
         this.router = router;
         this.service = service;
     }
 
-
     async attached() {
         this.sumTotalQty = 0;
         this.sumPrice = 0;
-        // var storages = await this.service.getStorage();
-        // this.sources = storages;
-        // this.sources = this.sources.map(source => {
-        //     source.toString = function () {
-        //         return this.name;
-        //     }
-        //     return source;
-        // })
-    }
-
-    async barcodeChoose(e) {
-        var itemData = e.target.value;
-        this.price = 0;
-        if (itemData && itemData.length >= 13) {
-            var fgTemp = await this.service.getByCode(itemData);
-            if (fgTemp != undefined) {
-                if (Object.getOwnPropertyNames(fgTemp).length > 0) {
-                    var fg = fgTemp[0];
-                    this.price = fg.domesticSale;
-                    if (fg != undefined && Object.getOwnPropertyNames(fg).length > 0) {
-                        var newItem = {};
-                        var _data = this.data.items.find((item) => item.code === fg.code);
-                        if (!_data) {
-                            this.qtyFg = 0;
-                            this.price = 0;
-                            newItem.itemId = fg._id;
-                            newItem.availableQuantity = 0;
-                            var result = await this.service.getDataInventory(this.data.source._id, newItem.itemId);
-                            if (result != undefined) {
-                                newItem.availableQuantity = result.quantity;
-                            }
-                            newItem.name = fg.name;
-                            newItem.code = fg.code;
-                            this.qtyFg = this.qtyFg + 1;
-                            newItem.quantity = 1;
-                            newItem.price = parseFloat(fg.domesticSale)
-                            newItem.remark = "";
-                            this.data.items.push(newItem);
-                        } else {
-                            this.firstPrice = 0;
-                            this.qtyFg = parseInt(_data.quantity) + 1;
-                            this.firstPrice = this.qtyFg * this.price
-                            _data.price = parseFloat(this.firstPrice)
-                            _data.quantity = this.qtyFg;
-                        }
-                    }
-                }
-            }
-            this.barcode = "";
-        }
-    }
-
-    sourceChange(e) {
-        this.data.items = [];
-        if (this.data.source && this.data.source._id)
-            this.data.sourceId = this.data.source._id;
-        else
-            this.data.sourceId = null;
-    }
-
-    get hasSource() {
-        return this.data && this.data.sourceId && this.data.sourceId !== '';
-    }
-
-    async nameChoose(e) {
-        this.hasFocus = false;
-        var itemData = e.detail;
-        if (itemData && itemData.code && itemData.code !== "") {
-            if (Object.getOwnPropertyNames(itemData).length > 0) {
-                var newItem = {};
-                var _data = this.data.items.find((item) => item.code === itemData.code);
-                if (!_data) {
-                    this.qtyFg = 0;
-                    this.price = 0;
-                    newItem.itemId = itemData._id;
-                    newItem.availableQuantity = 0;
-                    var result = await this.service.getDataInventory(this.data.source._id, newItem.itemId);
-                    if (result != undefined) {
-                        newItem.availableQuantity = result.quantity;
-                    }
-                    newItem.name = itemData.name;
-                    newItem.code = itemData.code;
-                    newItem.quantity = 1;
-                    this.qtyFg = this.qtyFg + 1;
-                    this.price = itemData.domesticSale;
-                    newItem.price = parseFloat(itemData.domesticSale);
-                    newItem.remark = "";
-                    this.data.items.push(newItem);
-                }
-                this.item = null;
-            }
-        }
-    }
-    removeItem(item) {
-        var itemIndex = this.data.items.indexOf(item);
-        this.data.items.splice(itemIndex, 1);
-    }
-
-    inQtyChanged(item) {
-        var itemIndex = this.data.items.indexOf(item);
-        this.data.items[itemIndex].Qty = this.data.items[itemIndex].availableQuantity + this.data.items[itemIndex].inQty;
-        if (this.data.items[itemIndex].outQty && this.data.items[itemIndex].outQty > 0) {
-            this.data.items[itemIndex].Qty = this.data.items[itemIndex].Qty - this.data.items[itemIndex].outQty;
-        }
-    }
-    outQtyChanged(item) {
-        var itemIndex = this.data.items.indexOf(item);
-        this.data.items[itemIndex].Qty = this.data.items[itemIndex].availableQuantity - this.data.items[itemIndex].outQty;
-        if (this.data.items[itemIndex].inQty && this.data.items[itemIndex].inQty > 0) {
-            this.data.items[itemIndex].Qty = this.data.items[itemIndex].Qty + this.data.items[itemIndex].inQty;
-        }
     }
 
     get sourceLoader() {
         return SourceLoader;
     }
+
+    sourceChange(e) {
+        this.data.items = [];
+        if (this.data.storage && this.data.storage._id){
+            this.data.storage = this.data.storage;
+            console.log(this.data.storage);
+        }
+        else {
+            this.data.storage = null;
+        }   
+    }
+
+    get hasSource() {
+        return this.data && this.data.storage != null && this.data.storage._id !== '';
+    }
+
+    async barcodeChoose(e) {
+        var itemData = e.target.value;
+        var source = this.data.storage._id;
+
+        if (itemData && itemData.length >= 13) {
+            let args = {
+                itemData: itemData,
+                source: source
+            };
+
+            var temp = await this.service.getByCode(args);
+
+            if (temp != undefined) {
+                if (Object.getOwnPropertyNames(temp).length > 0) {
+                    var itemTemp = temp[0];
+                    if (itemTemp != undefined) {
+                        if(Object.getOwnPropertyNames(itemTemp).length > 0) {
+                        var _data = this.data.items.find((item) => item.item.code === itemTemp.item.code);
+                            if (!_data) {
+                                var newItem = {};
+                                var item = {}
+
+                                item._id = itemTemp.item._id;
+                                item.name = itemTemp.item.name;
+                                item.code = itemTemp.item.code;
+                                item.uom = itemTemp.item.uom;
+                                item.size = itemTemp.item.size;
+                                item.articleRealizationOrder = itemTemp.item.articleRealizationOrder;
+                                item.domesticCOGS = parseFloat(itemTemp.item.domesticCOGS);
+                                item.domesticSale = parseFloat(itemTemp.item.domesticSale);
+                                item.domesticRetail = parseFloat(itemTemp.item.domesticRetail);
+                                item.domesticWholesale = parseFloat(itemTemp.item.domesticWholesale);
+
+                                newItem.item = item;
+                                newItem.qtyBeforeAdjustment = itemTemp.quantity;
+                                newItem.qtyAdjustment = 0;
+                                newItem.remark = "";
+                                newItem.type = "IN";                                
+
+                                this.data.items.push(newItem);
+
+                            } else {
+                                alert("Barang sudah ada di list");
+                            }
+                        }
+                    } else {
+                        alert("Barang tidak ada di Inventory");
+                    }
+                }
+            }
+            else {
+                alert("Barang tidak ditemukan");
+            }
+            this.barcode = "";
+        }
+    }    
+
+    // async nameChoose(e) {
+    //     this.hasFocus = false;
+    //     var itemData = e.detail;
+    //     if (itemData && itemData.code && itemData.code !== "") {
+    //         if (Object.getOwnPropertyNames(itemData).length > 0) {
+    //             var newItem = {};
+    //             var _data = this.data.items.find((item) => item.code === itemData.code);
+    //             if (!_data) {
+    //                 this.qtyFg = 0;
+    //                 this.price = 0;
+    //                 newItem.itemId = itemData._id;
+    //                 newItem.availableQuantity = 0;
+    //                 var result = await this.service.getDataInventory(this.data.source._id, newItem.itemId);
+    //                 if (result != undefined) {
+    //                     newItem.availableQuantity = result.quantity;
+    //                 }
+    //                 newItem.name = itemData.name;
+    //                 newItem.code = itemData.code;
+    //                 newItem.quantity = 1;
+    //                 this.qtyFg = this.qtyFg + 1;
+    //                 this.price = itemData.domesticSale;
+    //                 newItem.price = parseFloat(itemData.domesticSale);
+    //                 newItem.remark = "";
+    //                 this.data.items.push(newItem);
+    //             }
+    //             this.item = null;
+    //         }
+    //     }
+    // }
+
+    removeItem(item) {
+        var itemIndex = this.data.items.indexOf(item);
+        this.data.items.splice(itemIndex, 1);
+    }
+
+    // typeChanged(item) {
+
+    //     var itemIndex = this.data.items.indexOf(item);
+    //     this.data.items[itemIndex].type == item.type;            
+
+    //     this.qtyChanged(this.data.items[itemIndex].code, this.data.items[itemIndex].qtyAdjustment);
+    // }
+
+    // qtyChanged(code, qty) {
+    
+    //     var _data = this.data.items.find((item) => item.item.code === code);
+    //     if(_data) {
+    //         if(_data.type == "IN"){
+    //             _data.qty = _data.qtyBeforeAdjustment + qty;
+    //         } else {
+    //             _data.qty = _data.qtyBeforeAdjustment - qty;
+    //         }
+    //     }    
+    // }
 }

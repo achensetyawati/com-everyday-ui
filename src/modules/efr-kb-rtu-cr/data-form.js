@@ -264,7 +264,7 @@ export class DataForm {
           // var fg = fgTemp[0];
           // this.price = fg.domesticSale;
           // var newItem = {};
-          var _data = this.data.items.find((item) => item.item.Code === barcode);
+          var _data = this.data.items.find((item) => item.item.code === barcode);
           if (_data) {
             _data.quantity = parseFloat(quantity);
           }
