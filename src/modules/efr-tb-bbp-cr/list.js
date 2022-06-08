@@ -43,7 +43,11 @@ export class List {
           page: parseInt(info.offset / info.limit, 10) + 1,
           size: info.limit,
           keyword: info.search,
-          order: order
+          order: order,
+          filter: JSON.stringify ({
+            'Reference.Contains("EVR-FN") || Reference.Contains("EVR-KB/PLR")': "true",
+            'DestinationCode.Contains("GDG.05")': "false"
+          })
       };
 
       return this.service.search(arg)
