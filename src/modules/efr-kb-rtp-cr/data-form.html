@@ -12,6 +12,7 @@
           label="Sumber Penyimpanan" 
           value.bind="data.source" 
           items.bind="sources" 
+          read-only.bind="data.items.length>0"
           key="code" 
           text="name">
         </au-dropdown>
@@ -29,14 +30,8 @@
         </au-dropdown>
 
         <p class="col-md-1">Barcode</p>
-
-        <input 
-          type="text" 
-          focus.bind="hasFocus" 
-          value.bind="barcode" 
-          class="col-md-3"
-          aria-placeholder="Barcode">
-        </input>
+        <input type="text" focus.bind="hasFocus" value.bind="barcode" class="col-md-3" aria-placeholder="Barcode" input.delegate="barcodeChanged($event)"></input>
+      
 
         <!-- <input type="text" focus.bind="hasFocus" value.bind="barcode" class="col-md-3" aria-placeholder="Barcode" input.delegate="barcodeChoose($event)"></input> -->
         <!-- <finishedgoods-auto-suggest label="Nama Barang" value.bind="item" class="col-md-5" read-only.bind="readOnly" change.delegate="nameChoose($event)"></finishedgoods-auto-suggest> -->
@@ -86,7 +81,7 @@
                     value.bind="item.quantity" 
                     max.bind="item.availableQuantity" 
                     min="0"
-                    change.delegate="qtyChange(item.code, item.quantity)" 
+                    change.delegate="qtyChange(item.item.code, item.quantity)" 
                     />
                   <span class="help-block">${error.items[$index].quantity}</span>
                 </td>

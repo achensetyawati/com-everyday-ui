@@ -20,7 +20,7 @@ export class Create {
     }
 
     save() { 
-        this.data.sourceId= this.data.source._id;
+        console.log(this.data);
         this.service.create(this.data)
             .then(result => {
                 this.list();
