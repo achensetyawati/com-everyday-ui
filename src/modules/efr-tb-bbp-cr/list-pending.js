@@ -11,7 +11,8 @@ export class Pending {
       page: 1,
       keyword: '',
       filter: JSON.stringify ({
-        "IsReceived": false
+        "IsReceived": false,
+        'PackingList.Contains("EVR-FN") || Reference.Contains("EVR-KB/RTP")': "true",
       })
     };
     keyword = '';
@@ -28,7 +29,7 @@ export class Pending {
     // }
 
     async activate() {
-        this.info.keyword = 'EVR-FN';
+        //this.info.keyword = 'EVR-FN';
         var result = await this.service.listPending(this.info);
         console.log(result.data);
         var resultWithReference = await result.data.map(item => {
