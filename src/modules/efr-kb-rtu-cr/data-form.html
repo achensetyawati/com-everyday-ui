@@ -61,7 +61,7 @@
                             <div class="form-group ${error.items[$index].quantity?'has-error':''}">
                                 <input class="form-control" type="number" name="quantity" value.bind="item.quantity"
                                   max.bind="item.availablequantity" min="0"
-                                    change.delegate="qtyChange(item.code, item.quantity)" />
+                                    change.delegate="qtyChange(item.item.code, item.quantity)" />
                                 <span class="help-block">${error.items[$index].quantity}</span>
                             </div>
                         </div>
