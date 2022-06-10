@@ -91,7 +91,7 @@ export class DataForm {
                   itemInternationalRetail: datas.itemInternationalRetail,
                   itemInternationalSale: datas.itemInternationalSale,
                   itemInternationalWholeSale: datas.itemInternationalWholeSale,
-                  quantity: datas.quantity,
+                  quantity: datas.quantity > 0? 1:0,
                   availablequantity: datas.quantity
                 })
                 this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity);
@@ -284,7 +284,7 @@ export class DataForm {
                         itemInternationalRetail: datas.itemInternationalRetail,
                         itemInternationalSale: datas.itemInternationalSale,
                         itemInternationalWholeSale: datas.itemInternationalWholeSale,
-                        quantity: datas.quantity,
+                        quantity: datas.quantity > 0 ? 1:0,
                         availablequantity: datas.quantity,
                         price: datas.item.domesticSale * datas.quantity
                       })
