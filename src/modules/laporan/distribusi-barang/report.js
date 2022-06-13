@@ -104,7 +104,7 @@ export class Report {
                 var tanggalRowSpan = 0;
                 for (var data of results) {
                     var duplicate = this.data.result.find((item) => item.packingList === data.packingList);
-                    if(!duplicate){
+                    if(!duplicate) {
                         totalQty = 0;
                         totalPrice = 0;
                         var result = {};
@@ -142,52 +142,52 @@ export class Report {
         })
     }
 
-        generateReportHTML() {
-            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    generateReportHTML() {
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     
-            this.reportHTML = "";
-            this.reportHTML += "    <table class='table table-bordered'>";
-            this.reportHTML += "        <thead>";
-            this.reportHTML += "            <tr style='background-color:#282828; color:#ffffff;'>";
-            this.reportHTML += "                <th>Tanggal</th>";
-            this.reportHTML += "                <th>Sumber Penyimpanan</th>";
-            this.reportHTML += "                <th>Tujuan Penyimpanan</th>";
-            this.reportHTML += "                <th>Transaksi</th>";
-            this.reportHTML += "                <th>Packing List</th>";
-            this.reportHTML += "                <th>Status</th>";
-            this.reportHTML += "                <th>Total Kuantitas Barang</th>";
-            this.reportHTML += "                <th>Total Harga Jual</th>";
-            this.reportHTML += "            </tr>";
-            this.reportHTML += "        </thead>";
-            this.reportHTML += "        <tbody>";
-            for (var data of this.data.result) {
-                    var isTanggalRowSpan = false;
-                    var tanggalrowspan = 0;
-                // for (var item of data.items) {
-                    var isItemRowSpan = false;
-                    // for (var itemDetail of item.details) {
-                        // var filter = true;
-                        tanggalrowspan++;
-                        this.reportHTML += "        <tr>";
-                        if (!isItemRowSpan) {
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.tanggal.getDate() + " " + months[data.tanggal.getMonth()] + " " + data.tanggal.getFullYear() + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.sourceName + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.destinationName + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.transaction + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.packingList + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.isReceived + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + (data.totalQty).toLocaleString() + "</td>";
-                            this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + (data.totalPrice).toLocaleString() + "</td>";
-                        }
-                        this.reportHTML += "        </tr>";
-                        isTanggalRowSpan = true;
-                        isItemRowSpan = true;
-                    // }
-                    this.reportHTML = this.reportHTML.replace(moment(data.tanggal).format(), tanggalrowspan);
+        this.reportHTML = "";
+        this.reportHTML += "    <table class='table table-bordered'>";
+        this.reportHTML += "        <thead>";
+        this.reportHTML += "            <tr style='background-color:#282828; color:#ffffff;'>";
+        this.reportHTML += "                <th>Tanggal</th>";
+        this.reportHTML += "                <th>Sumber Penyimpanan</th>";
+        this.reportHTML += "                <th>Tujuan Penyimpanan</th>";
+        this.reportHTML += "                <th>Transaksi</th>";
+        this.reportHTML += "                <th>Packing List</th>";
+        this.reportHTML += "                <th>Status</th>";
+        this.reportHTML += "                <th>Total Kuantitas Barang</th>";
+        this.reportHTML += "                <th>Total Harga Jual</th>";
+        this.reportHTML += "            </tr>";
+        this.reportHTML += "        </thead>";
+        this.reportHTML += "        <tbody>";
+        for (var data of this.data.result) {
+                var isTanggalRowSpan = false;
+                var tanggalrowspan = 0;
+            // for (var item of data.items) {
+                var isItemRowSpan = false;
+                // for (var itemDetail of item.details) {
+                    // var filter = true;
+                    tanggalrowspan++;
+                    this.reportHTML += "        <tr>";
+                    if (!isItemRowSpan) {
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.tanggal.getDate() + " " + months[data.tanggal.getMonth()] + " " + data.tanggal.getFullYear() + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.sourceName + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.destinationName + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.transaction + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.packingList + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + data.isReceived + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + (data.totalQty).toLocaleString() + "</td>";
+                        this.reportHTML += "        <td width='300px' rowspan='" + data.itemRowSpan + "'>" + (data.totalPrice).toLocaleString() + "</td>";
+                    }
+                    this.reportHTML += "        </tr>";
+                    isTanggalRowSpan = true;
+                    isItemRowSpan = true;
                 // }
-            }
-            this.reportHTML += "        </tbody>";
-            this.reportHTML += "    </table>";
+                this.reportHTML = this.reportHTML.replace(moment(data.tanggal).format(), tanggalrowspan);
+            // }
         }
+        this.reportHTML += "        </tbody>";
+        this.reportHTML += "    </table>";
     }
+}
 
