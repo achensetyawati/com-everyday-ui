@@ -82,9 +82,10 @@ export class DataForm {
       var selectedSupplier = newValue;
       //console.log(newValue)
       if (selectedSupplier) {
-        var _data = this.data.items.find((item) => item.code === selectedSupplier.code);
+        var _data = this.data.items.find((item) => item.item.code === selectedSupplier.code);
+     
         if (!_data) {
-          //console.log(selectedSupplier.name)
+      
           this.sumTotalQty = 0;
           this.sumPrice = 0;
           let args = {
@@ -104,14 +105,20 @@ export class DataForm {
                   quantity: datas.quantity>0? 1 : 0,
                   availablequantity: datas.quantity
                 })
-                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity);
-                this.sumPrice += datas.item.domesticSale * datas.quantity;
+                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity>0? 1 : 0);
+                this.sumPrice += datas.item.domesticSale * (datas.quantity>0? 1 : 0);
               }
             } else {
               alert("Stock Inventory Kosong")
             }
           })
           this.makeTotal(this.data.items);
+        }else
+        {
+          this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
+          this.sumPrice += _data.item.domesticSale * ( _data.quantity);
+          _data.quantity++;
+         
         }
 
       } else {
@@ -122,16 +129,19 @@ export class DataForm {
 
     }
     barcodeChanged(newValue, oldValue) {
-      if (newValue) {
-        // var _data = this.data.items.find((item) => item.code === selectedSupplier.code);
-        // if (!_data) {
+      var selectedSupplier = newValue;
+    
+      if (selectedSupplier) {
+        var _data = this.data.items.find((item) => item.item.code === newValue);
+        console.log(_data);
+        if (!_data) {
           let args = {
             itemData: newValue,
             source: this.data.source._id,
-          };
-          console.log(newValue.length);
+          }; 
          if(newValue.length >= 13)
          {
+          console.log(args);
           this.service.getByCode(args).then(result => {
             //var datas = result;
             console.log(result);
@@ -149,8 +159,8 @@ export class DataForm {
                   availablequantity: datas.quantity
                   
                 })
-                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity);
-                this.sumPrice += datas.item.domesticSale * datas.quantity;
+                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity>0? 1 : 0);
+                this.sumPrice += datas.item.domesticSale * (datas.quantity>0? 1 : 0);
               }
 
             } else {
@@ -161,14 +171,18 @@ export class DataForm {
           
         //}
 
-      } else {
-        //this.data.supplier = {};
-        //this.data.items = [];
-        //this.data.supplierId = undefined;
+      }else
+      {
+        this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
+        this.sumPrice += _data.item.domesticSale * ( _data.quantity);
+        _data.quantity++;
+       
       }
+
       this.barcode="";
       this.makeTotal(this.data.items);
     }
+  }
     // async barcodeChoose(e) {
     //     var itemData = e.target.value;
     //     this.price = 0;
