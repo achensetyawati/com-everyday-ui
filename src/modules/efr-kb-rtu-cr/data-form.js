@@ -146,12 +146,12 @@ export class DataForm {
     
     itemChanged(newValue, oldValue) {
       var selectedSupplier = newValue;
-      // console.log(newValue)
+      //console.log(newValue)
       if (selectedSupplier) {
-        var _data = null;
-
+        var _data = this.data.items.find((item) => item.item.code === selectedSupplier.code);
+     
         if (!_data) {
-          //console.log(selectedSupplier.name)
+      
           this.sumTotalQty = 0;
           this.sumPrice = 0;
           let args = {
@@ -159,48 +159,49 @@ export class DataForm {
             itemData: selectedSupplier.name,
           };
           this.service.getByName(args).then(result => {
-             console.log(result);
             //var datas = result;
             if (result.length > 0) {
               for (var datas of result) {
-                 console.log(datas)
                 this.data.items.push({
                   item: datas.item,
                   itemInternationalCOGS: datas.itemInternationalCOGS,
                   itemInternationalRetail: datas.itemInternationalRetail,
                   itemInternationalSale: datas.itemInternationalSale,
                   itemInternationalWholeSale: datas.itemInternationalWholeSale,
-                  quantity: datas.quantity > 0 ? 1:0,
-                  availablequantity : datas.quantity
+                  quantity: datas.quantity>0? 1 : 0,
+                  availablequantity: datas.quantity
                 })
-                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity);
-                //console.log(datas.item.domesticSale * datas.quantity);
-                this.sumPrice += datas.item.domesticSale * datas.quantity;
+                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity>0? 1 : 0);
+                this.sumPrice += datas.item.domesticSale * (datas.quantity>0? 1 : 0);
               }
-              // console.log(this.data.items);
             } else {
               alert("Stock Inventory Kosong")
             }
           })
           this.makeTotal(this.data.items);
+        }else
+        {
+          this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
+          this.sumPrice += _data.item.domesticSale * ( _data.quantity);
+          _data.quantity++;
+         
         }
 
       } else {
         //this.data.supplier = {};
-        //this.data.items.splice(0);
+        this.data.items = [];
         //this.data.supplierId = undefined;
       }
-
     }
     barcodeChanged(newValue, oldValue) {
       if (newValue) {
-        // var _data = this.data.items.find((item) => item.code === selectedSupplier.code);
-        // if (!_data) {
+        var _data = this.data.items.find((item) => item.item.code === newValue);
+        if (!_data) {
           let args = {
             itemData: newValue,
             source: this.data.source._id,
-          };
-          console.log(newValue.length);
+          }; 
+
          if(newValue.length >= 13)
          {
           this.service.getByCode(args).then(result => {
@@ -229,17 +230,19 @@ export class DataForm {
             }
           })
          }
-          
-        //}
 
-      } else {
-        //this.data.supplier = {};
-        //this.data.items = [];
-        //this.data.supplierId = undefined;
+      }else
+      {
+        this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
+        this.sumPrice += _data.item.domesticSale * ( _data.quantity);
+        _data.quantity++;
+       
       }
+
       this.barcode="";
       this.makeTotal(this.data.items);
     }
+  }
     async qtyChange(code, qty) {
         // var barcode = code;
         // var quantity = qty;
