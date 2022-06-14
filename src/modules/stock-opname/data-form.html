@@ -29,13 +29,13 @@
             read-only="true">
         </au-textbox>      
         <au-collection 
-                    items.bind="data.items"
-                    errors.bind="error.items" 
-                    columns.bind="itemsColumns" 
-                    title="Item"
-                    read-only.bind="readOnly" 
-                    change.delegate="checkAllCallBack($event)"
-                    item-template="modules/stock-opname/template/item">
+            items.bind="data.items"
+            errors.bind="error.items" 
+            columns.bind="itemsColumns" 
+            title="Item"
+            read-only.bind="readOnly" 
+            change.delegate="checkAllCallBack($event)"
+            item-template="modules/stock-opname/template/item">
         </au-collection>
         <!--<div if.bind="error">
             <span style="color:red">- Catatan harus diisi .</span>

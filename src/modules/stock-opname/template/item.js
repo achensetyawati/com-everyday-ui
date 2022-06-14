@@ -11,15 +11,20 @@ export class Item {
   }
   
   get qtyDifferent(){
-      return (this.item.qtyBeforeSO - this.item.qtySO);
+    if(this.item.qtyBeforeSO < this.item.qtySO){
+      return -(this.item.qtyBeforeSO - this.item.qtySO);  
+    } else {
+      return (this.item.qtySO - this.item.qtyBeforeSO);
+    }
   }
   
   get isAdjust(){
-      return (this.item.qtyBeforeSO - this.item.qtySO) === 0 ? true : false;
+    return (this.item.qtyBeforeSO - this.item.qtySO) === 0 ? true : false;
   }
 
   get Adjustment(){
-      return (this.item.qtyBeforeSO - this.item.qtySO) === 0 ? "" : this.item.isAdjusted ? "Ya" : "Tidak";
+    return (this.item.qtyBeforeSO - this.item.qtySO) === 0 ? "" : this.item.isAdjusted ? "Ya" : "Tidak";
+    //return this.item.isAdjusted ? "Ya" : "Tidak";
   }
 
   @computedFrom("item.isAdjusted")
@@ -30,7 +35,6 @@ export class Item {
     return (this.item.isAdjusted ? myString + ' ' + _myCreatedDate  : '')
   }
  
-
   controlOptions = {
     control: {
       length: 12
