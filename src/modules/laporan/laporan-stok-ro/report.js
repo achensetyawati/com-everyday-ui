@@ -25,9 +25,9 @@ export class Report {
 
     options = {
         columns: [],
-        search: true,
-        showToggle: true,
-        showColumns: true,
+        search: false,
+        showToggle: false,
+        showColumns: false,
         undefinedText: '0'
     };
 
@@ -72,7 +72,7 @@ export class Report {
         }
     }
 
-    showReport(){
+    async showReport(){
         // this.tableData = [];
 
         // let input = this.data;
@@ -81,7 +81,7 @@ export class Report {
         } else {
             this.error = "";
             // this.code = input ? input.this.code : "";
-            this.service.getStokByRO(this.code)
+            await this.service.getStokByRO(this.code)
                 .then(items => {
                         this.generateReportHTML(items);
                         if (items) {
@@ -131,41 +131,44 @@ export class Report {
         return tableHeader;
     }
 
-    generateReportHTML(dataResult) {
+    async generateReportHTML(dataResult) {
         var columns = []
         var size = [];
         var tempArr = [];
         this.data = [];
-
         for (var dataItem of dataResult) {
-            if (!this.data[dataItem.storageName]) {
-                this.data[dataItem.storageName] = {};
-                this.data[dataItem.storageName]["store"] = dataItem.storageName;
-                this.data[dataItem.storageName]["noRO"] = dataItem.ro;
-                this.data[dataItem.storageName]['age'] = dataItem.age + " hari";
+            if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
+                this.data[dataItem.storageName + dataItem.ro + dataItem.age] = {};
+                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["store"] = dataItem.storageName;
+                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["noRO"] = dataItem.ro;
+                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]['age'] = dataItem.age + " hari";
             }
 
-            if (this.data[dataItem.storageName]) {
-                if (!this.data[dataItem.storageName]["totalOnInventory"] && !this.data[dataItem.storageName]["totalOnSales"]) {
-                    this.data[dataItem.storageName]["totalOnInventory"] = 0;
-                     this.data[dataItem.storageName]["totalOnSales"] = 0;
+            if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
+                if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] && !this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"]) {
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] = 0;
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] = 0;
                 }
-                this.data[dataItem.storageName]["totalOnInventory"] += dataItem.quantityOnInventory;
-                this.data[dataItem.storageName]["totalOnSales"] += dataItem.quantityOnSales;
+                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] += dataItem.quantityOnInventory;
+                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] += dataItem.quantityOnSales;
             }
 
             // if (this.data[dataItem.storageName]) {
             //     if (this.data[dataItem.size]) {
-                    if (!this.data[dataItem.storageName]) {
-                        if (!this.data[dataItem.size]) {
-                            this.data[dataItem.size] = {};
-                            this.data[dataItem.size]["onInventory"] = dataItem.quantityOnInventory;
-                            this.data[dataItem.size]["onSales"] = dataItem.quantityOnInventory;
+                    if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
+                        if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] && this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"]) {
+                            //this.data[dataItem.size] = {};
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] = dataItem.quantityOnInventory;
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] = dataItem.quantityOnInventory;
                         }
-                    } else if (this.data[dataItem.storageName]) {
-                        if (this.data[dataItem.size]) {
-                            this.data[dataItem.size]["onInventory"] = dataItem.quantityOnInventory;
-                            this.data[dataItem.size]["onSales"] = dataItem.quantityOnSales;
+                    } else if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
+                        if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] && this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"]) {
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] += dataItem.quantityOnInventory;
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] += dataItem.quantityOnInventory;
+                        }
+                        else{
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] = dataItem.quantityOnInventory;
+                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] = dataItem.quantityOnInventory;
                         }
                     }
                 // }
@@ -180,16 +183,16 @@ export class Report {
         for (var i = 1; i < props.length; i++) {
             tempArr.push(this.data[props[i]]);
         }
-
         columns = this.generateTableInfo(size)
         this.data = tempArr;
         this.options.columns = columns;
 
-        new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             this.models.__table("refreshOptions", this.options);
             resolve();
         }).then(() => {
             this.models.refresh();
         });
+
     }
 }
