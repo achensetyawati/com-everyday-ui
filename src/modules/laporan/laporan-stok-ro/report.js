@@ -145,34 +145,26 @@ export class Report {
             }
 
             if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
-                if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] && !this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"]) {
-                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] = 0;
-                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] = 0;
-                }
-                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] += dataItem.quantityOnInventory;
-                this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] += dataItem.quantityOnSales;
+                if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"]) 
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] = dataItem.quantityOnInventory;
+                else
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnInventory"] += dataItem.quantityOnInventory;
+                if(!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"])
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] = dataItem.quantityOnSales;
+                else
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age]["totalOnSales"] += dataItem.quantityOnSales;
             }
 
-            // if (this.data[dataItem.storageName]) {
-            //     if (this.data[dataItem.size]) {
-                    if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
-                        if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] && this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"]) {
-                            //this.data[dataItem.size] = {};
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] = dataItem.quantityOnInventory;
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] = dataItem.quantityOnInventory;
-                        }
-                    } else if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
-                        if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] && this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"]) {
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] += dataItem.quantityOnInventory;
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] += dataItem.quantityOnInventory;
-                        }
-                        else{
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] = dataItem.quantityOnInventory;
-                            this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] = dataItem.quantityOnInventory;
-                        }
-                    }
-                // }
-            // }
+            if (this.data[dataItem.storageName+ dataItem.ro + dataItem.age]) {
+                if (!this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"]) 
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] = dataItem.quantityOnInventory;
+                else
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onInventory"] += dataItem.quantityOnInventory;
+                if(!this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"])
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] = dataItem.quantityOnInventory;
+                else
+                    this.data[dataItem.storageName+ dataItem.ro + dataItem.age][dataItem.size+"onSales"] += dataItem.quantityOnInventory;
+            }
 
             if (size.indexOf(dataItem.size) === -1) {
                 size.push(dataItem.size);
@@ -186,13 +178,18 @@ export class Report {
         columns = this.generateTableInfo(size)
         this.data = tempArr;
         this.options.columns = columns;
+        
+        var bootstrapTableOptions = {
+            columns: columns,
+            data: this.data,
+            fixedColumns: true,
+            fixedNumber: 3
+          };
+          if (this.data.length > 10) { // row > 10
+            bootstrapTableOptions.height = $(window).height() - $('.navbar').height() - $('.navbar').height() - 25;
+          }
+          $(this.table).bootstrapTable('destroy').bootstrapTable(bootstrapTableOptions);
 
-        await new Promise((resolve, reject) => {
-            this.models.__table("refreshOptions", this.options);
-            resolve();
-        }).then(() => {
-            this.models.refresh();
-        });
 
     }
 }
