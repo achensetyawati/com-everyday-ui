@@ -146,14 +146,11 @@ export class DataForm {
     
     itemChanged(newValue, oldValue) {
       var selectedSupplier = newValue;
-      //console.log(newValue)
       if (selectedSupplier) {
         var _data = this.data.items.find((item) => item.item.code === selectedSupplier.code);
      
         if (!_data) {
-      
-          this.sumTotalQty = 0;
-          this.sumPrice = 0;
+       
           let args = {
             source: this.data.source._id,
             itemData: selectedSupplier.name,
@@ -187,15 +184,13 @@ export class DataForm {
          
         }
 
-      } else {
-        //this.data.supplier = {};
-        this.data.items = [];
-        //this.data.supplierId = undefined;
+      } else { 
+        this.item-""; 
       }
     }
     barcodeChanged(newValue, oldValue) {
       if (newValue) {
-        var _data = this.data.items.find((item) => item.item.code === newValue);
+        var _data = this.data.items.find((item) => item.item.code === newValue.toString().trim());
         if (!_data) {
           let args = {
             itemData: newValue,
@@ -205,10 +200,6 @@ export class DataForm {
          if(newValue.length >= 13)
          {
           this.service.getByCode(args).then(result => {
-            //var datas = result;
-            console.log(result);
-            this.sumTotalQty = 0;
-            this.sumPrice = 0;
             if (result.length > 0) {
               for (var datas of result) {
                 this.data.items.push({
