@@ -266,7 +266,7 @@ export class DataForm {
       var newValue = e.target.value;
       if (newValue && newValue.length >= 13) {
         let args = {
-                  itemData: newValue,
+                  itemData: newValue.toString().trim(),
                   source: this.data.source._id,
                 };
         //var _data = this.data.items.find((item) => item.code === selectedSupplier.code);
@@ -275,7 +275,7 @@ export class DataForm {
                   if (result.length > 0) {
                     for (var datas of result) {
                       //var newItem = {};
-                      var _data = this.data.items.find((item) => item.item.code === datas.code.toString().trim());
+                      var _data = this.data.items.find((item) => item.item.code === datas.item.code);
                       if(!_data){
       
                       this.data.items.push({
