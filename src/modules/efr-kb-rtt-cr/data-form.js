@@ -275,7 +275,7 @@ export class DataForm {
                   if (result.length > 0) {
                     for (var datas of result) {
                       //var newItem = {};
-                      var _data = this.data.items.find((item) => item.item.code === datas.code);
+                      var _data = this.data.items.find((item) => item.item.code === datas.code.toString().trim());
                       if(!_data){
       
                       this.data.items.push({
