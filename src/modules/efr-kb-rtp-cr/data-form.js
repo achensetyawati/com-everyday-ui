@@ -128,7 +128,9 @@ export class DataForm {
     }
 
     barcodeChanged(newValue, oldValue) {
-      var selectedSupplier = newValue.trim();
+      //var selectedSupplier = newValue.trim();
+      var selectedSupplier = newValue.toString().trim();
+      console.log(selectedSupplier);
     
       if (selectedSupplier) {
 
