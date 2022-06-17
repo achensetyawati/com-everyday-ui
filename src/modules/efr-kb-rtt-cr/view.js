@@ -55,7 +55,7 @@ export class View {
             .then(spk => {
               console.log(spk);
                 this.printStruk = "";
-                this.printStruk += "<table style='width:100%;'>";
+                this.printStruk += "<table style='width:88%;'>";
                 this.printStruk += "    <tr style='height:20px;'>";
                 this.printStruk += "        <td colspan='3' class='text-left' style='height:15px;'><b> PT EFRATA RETAILINDO </b> </td>";
                 this.printStruk += "    </tr>";
@@ -120,6 +120,7 @@ export class View {
                 this.printStruk += "    </tr>";
 
                 for (var item of this.data.items) {
+                    var remark= item.remark? item.remark:"";
                     this.printStruk += "    <tr style='height:20px;'>";
                     this.printStruk += "        <td class='text-left' style='padding-right:6pt; height:15px;'> " + item.item.code + " </td>";
                     this.printStruk += "        <td colspan='2' class='text-left' style='height:15px;'> " + item.item.name + " </td>";
@@ -130,7 +131,7 @@ export class View {
                     this.printStruk += "        <td class='text-right' style='height:15px;'> " + (item.item.domesticSale * item.quantity).toLocaleString() + " </td>";
                     this.printStruk += "    </tr>";
                     this.printStruk += "    <tr style='height:20px;'>";
-                    this.printStruk += "        <td class='text-left' style='padding-right:6pt; height:15px;'> " + item.remark + " </td>";
+                    this.printStruk += "        <td class='text-left' style='padding-right:6pt; height:15px;'> " + remark + " </td>";
                     this.printStruk += "    </tr>";
                     totalItem += item.quantity;
                     totalPrice += (item.item.domesticSale * item.quantity);
