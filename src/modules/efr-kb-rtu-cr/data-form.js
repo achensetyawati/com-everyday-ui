@@ -20,10 +20,12 @@ export class DataForm {
     firstPrice = 0;
     indexSource = 0;
     hasFocus = true;
+
     constructor(router, service) {
         this.router = router;
         this.service = service;
     }
+
     sumTotalQty;
     sumPrice;
 
@@ -57,6 +59,7 @@ export class DataForm {
     //     })
 
     // }
+    
     get itemLoader() {
       return ItemLoader;
     }
@@ -137,6 +140,7 @@ export class DataForm {
     //         }
     //     }
     // }
+
     itemView = (item) => {
       if (!item.Code)
         return `${item.name}`
@@ -146,17 +150,18 @@ export class DataForm {
     
     itemChanged(newValue, oldValue) {
       var selectedSupplier = newValue;
+      
       if (selectedSupplier) {
         var _data = this.data.items.find((item) => item.item.code === selectedSupplier.code);
      
         if (!_data) {
-       
+          
           let args = {
             source: this.data.source._id,
             itemData: selectedSupplier.name,
           };
+
           this.service.getByName(args).then(result => {
-            //var datas = result;
             if (result.length > 0) {
               for (var datas of result) {
                 this.data.items.push({
@@ -165,29 +170,29 @@ export class DataForm {
                   itemInternationalRetail: datas.itemInternationalRetail,
                   itemInternationalSale: datas.itemInternationalSale,
                   itemInternationalWholeSale: datas.itemInternationalWholeSale,
-                  quantity: datas.quantity>0? 1 : 0,
+                  quantity: datas.quantity > 0? 1 : 0,
                   availablequantity: datas.quantity
                 })
-                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity>0? 1 : 0);
-                this.sumPrice += datas.item.domesticSale * (datas.quantity>0? 1 : 0);
+
+                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity > 0 ? 1 : 0);
+                this.sumPrice += datas.item.domesticSale * (datas.quantity > 0 ? 1 : 0);
               }
             } else {
               alert("Stock Inventory Kosong")
             }
           })
-          this.makeTotal(this.data.items);
-        }else
-        {
+        } else {
           this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
           this.sumPrice += _data.item.domesticSale * ( _data.quantity);
           _data.quantity++;
-         
         }
-
       } else { 
-        this.item-""; 
+        this.item=""; 
       }
+
+      this.makeTotal(this.data.items);
     }
+
     barcodeChanged(newValue, oldValue) {
       if (newValue) {
         var _data = this.data.items.find((item) => item.item.code === newValue.toString().trim());
@@ -197,43 +202,39 @@ export class DataForm {
             source: this.data.source._id,
           }; 
 
-         if(newValue.length >= 13)
-         {
-          this.service.getByCode(args).then(result => {
-            if (result.length > 0) {
-              for (var datas of result) {
-                this.data.items.push({
-                  item: datas.item,
-                  itemInternationalCOGS: datas.itemInternationalCOGS,
-                  itemInternationalRetail: datas.itemInternationalRetail,
-                  itemInternationalSale: datas.itemInternationalSale,
-                  itemInternationalWholeSale: datas.itemInternationalWholeSale,
-                  quantity: datas.quantity > 0 ? 1:0,
-                  availablequantity: datas.quantity
-                  
-                })
-                this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity);
-                this.sumPrice += datas.item.domesticSale * datas.quantity;
+          if(newValue.length >= 13)
+          {
+            this.service.getByCode(args).then(result => {
+              if (result.length > 0) {
+                for (var datas of result) {
+                  this.data.items.push({
+                    item: datas.item,
+                    itemInternationalCOGS: datas.itemInternationalCOGS,
+                    itemInternationalRetail: datas.itemInternationalRetail,
+                    itemInternationalSale: datas.itemInternationalSale,
+                    itemInternationalWholeSale: datas.itemInternationalWholeSale,
+                    quantity: datas.quantity > 0 ? 1:0,
+                    availablequantity: datas.quantity
+                  })
+
+                  this.sumTotalQty = this.sumTotalQty + parseInt(datas.quantity > 0 ? 1:0);
+                  this.sumPrice += datas.item.domesticSale * (datas.quantity > 0 ? 1:0);
+                }
+              } else {
+                alert("Stock Inventory Kosong")
               }
-
-            } else {
-              alert("Stock Inventory Kosong")
-            }
-          })
-         }
-
-      }else
-      {
-        this.sumTotalQty = this.sumTotalQty + parseInt (_data.quantity);
-        this.sumPrice += _data.item.domesticSale * ( _data.quantity);
-        _data.quantity++;
-       
+            })
+          }
+        } else {
+          this.sumTotalQty = this.sumTotalQty + parseInt(_data.quantity);
+          this.sumPrice += _data.item.domesticSale * (_data.quantity);
+          _data.quantity++;
+        }
+        this.barcode="";
+        this.makeTotal(this.data.items);
       }
-
-      this.barcode="";
-      this.makeTotal(this.data.items);
     }
-  }
+
     async qtyChange(code, qty) {
         // var barcode = code;
         // var quantity = qty;
@@ -277,7 +278,6 @@ export class DataForm {
                 this.sumPrice += items[i].item.domesticSale * items[i].quantity;
             }
         }
-
     }
 
     removeItem(item) {
@@ -351,9 +351,6 @@ export class DataForm {
         this.service.getExpeditionServices().then(result => {
           this.expeditionServices = result;
         })
-    }
-
-    search() {
     }
 
     // sourceChange(e) {
