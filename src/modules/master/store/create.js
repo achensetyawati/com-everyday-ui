@@ -30,13 +30,25 @@ export class Create {
   }
 
   saveCallback(event) {
-    this.service.create(this.data)
-      .then(result => {
-        alert("Data berhasil dibuat");
-        this.router.navigateToRoute('create', {}, { replace: true, trigger: true });
-      })
-      .catch(e => {
-        this.error = e;
-      })
+    var er={};
+    if(!parseFloat(this.data.longitude)){
+      er.longitude = "longitude harus angka";
+      this.error = er;
+    }
+    
+    if(!parseFloat(this.data.latitude)){
+      er.latitude = "latitude harus angka";
+      this.error = er;
+    }
+    if(!er){
+      this.service.create(this.data)
+        .then(result => {
+          alert("Data berhasil dibuat");
+          this.router.navigateToRoute('create', {}, { replace: true, trigger: true });
+        })
+        .catch(e => {
+          this.error = e;
+        })
+    }
   }
 }
