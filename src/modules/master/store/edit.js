@@ -44,7 +44,7 @@ export class View {
             er.latitude = "latitude harus angka";
             this.error = er;
         }
-        if(!er){
+        if(!er.longitude && !er.latitude){
             this.service.update(this.data)
             .then(result => {
                 this.cancelCallback();
