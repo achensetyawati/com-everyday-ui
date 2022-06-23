@@ -60,7 +60,7 @@ export class DataForm {
     }
 
     async barcodeChoose(e) {
-        var itemData = e.target.value;
+        var itemData = e.target.value.toString().trim();
         var source = this.data.storage._id;
 
         if (itemData && itemData.length >= 13) {
@@ -105,7 +105,53 @@ export class DataForm {
                             }
                         }
                     } else {
+
                         alert("Barang tidak ada di Inventory");
+
+                        var tempMaster = await this.service.getMasterByCode(itemData);
+
+                        if (tempMaster != undefined) {
+                            if (Object.getOwnPropertyNames(tempMaster).length > 0) {
+                                var itemMasterTemp = tempMaster[0];
+
+                                console.log(itemMasterTemp);
+
+                                if (itemMasterTemp != undefined) {
+                                    if(Object.getOwnPropertyNames(itemMasterTemp).length > 0) {
+                                        var _data = this.data.items.find((item) => item.item.code === itemMasterTemp.code);
+
+                                        if (!_data) {
+                                            var newItem = {};
+                                            var item = {}
+            
+                                            item._id = itemMasterTemp._id;
+                                            item.name = itemMasterTemp.name;
+                                            item.code = itemMasterTemp.code;
+                                            item.uom = itemMasterTemp.Uom;
+                                            item.size = itemMasterTemp.Size;
+                                            item.articleRealizationOrder = itemMasterTemp.ArticleRealizationOrder;
+                                            item.domesticCOGS = itemMasterTemp.DomesticCOGS == null ? 0 : parseFloat(itemMasterTemp.DomesticCOGS);
+                                            item.domesticSale = itemMasterTemp.DomesticSale == null ? 0 : parseFloat(itemMasterTemp.DomesticSale);
+                                            item.domesticRetail = itemMasterTemp.DomesticRetail == null ? 0 : parseFloat(itemMasterTemp.DomesticRetail);
+                                            item.domesticWholesale = itemMasterTemp.DomesticWholesale == null ? 0 : parseFloat(itemMasterTemp.DomesticWholesale);
+            
+                                            newItem.item = item;
+                                            newItem.qtyBeforeAdjustment = 0;
+                                            newItem.qtyAdjustment = 0;
+                                            newItem.remark = "";
+                                            newItem.type = "IN";                                
+            
+                                            this.data.items.push(newItem);
+            
+                                        } else {
+                                            alert("Barang sudah ada di list");
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            alert("Barang tidak ditemukan");
+                        }
                     }
                 }
             }
