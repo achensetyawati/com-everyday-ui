@@ -85,6 +85,7 @@
                     <au-numeric 
                         value.bind="item.type == 'IN' ? (item.qtyBeforeAdjustment + item.qtyAdjustment) : (item.qtyBeforeAdjustment - item.qtyAdjustment)"
                         read-only="true" 
+                        error.bind="error.items[$index].quantity"
                         options.bind="controlOptions">
                     </au-numeric>
                 </td>
