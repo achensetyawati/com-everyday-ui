@@ -106,8 +106,6 @@ export class DataForm {
                         }
                     } else {
 
-                        alert("Barang tidak ada di Inventory");
-
                         var tempMaster = await this.service.getMasterByCode(itemData);
 
                         if (tempMaster != undefined) {
@@ -150,7 +148,7 @@ export class DataForm {
                                 }
                             }
                         } else {
-                            alert("Barang tidak ditemukan");
+                            alert("Barang tidak ada di data master");
                         }
                     }
                 }
