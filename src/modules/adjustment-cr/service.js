@@ -39,6 +39,13 @@ export class Service extends RestService {
     var endpoint = config.getEndpoint("inventory").client.baseUrl + `inventory/code?itemData=${args.itemData}&source=${args.source}`;
     return super.get(endpoint);
   }
+
+  getMasterByCode(code){
+    var config = Container.instance.get(Config);
+    var endpoint = config.getEndpoint("master").client.baseUrl + `items/finished-goods/code-discount/` + code;
+    return super.get(endpoint);
+  }
+
   getDataInventory(args) {
     var config = Container.instance.get(Config);
     var endpoint = config.getEndpoint("inventory").client.baseUrl + `inventory/stock?source=${args.source}&itemId=${args.itemData}`;
