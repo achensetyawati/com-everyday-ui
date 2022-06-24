@@ -35,14 +35,25 @@ export class View {
     }
 
     saveCallback(event) {
-
-        this.service.update(this.data)
+        var er={};
+        if(!parseFloat(this.data.longitude)){
+            er.longitude = "longitude harus angka";
+            this.error = er;
+        }
+        if(!parseFloat(this.data.latitude)){
+            er.latitude = "latitude harus angka";
+            this.error = er;
+        }
+        if(!er.longitude && !er.latitude){
+            this.service.update(this.data)
             .then(result => {
                 this.cancelCallback();
             })
             .catch(e => {
                 this.error = e;
             })
+        }
+        
     }
 
 }
