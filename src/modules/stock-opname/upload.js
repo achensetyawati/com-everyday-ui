@@ -76,6 +76,9 @@ export class Create {
                     //     this.service.publish(getRequest);
                     //     alert("Upload gagal!\n Ada beberapa data yang harus diperbaiki");
                     // }
+
+                    console.log(result);
+
                     if (result.status == 404) {
                         var getRequest = this.service.endpoint.client.fetch(endpoint, request);
                         this.service._downloadFile(getRequest);

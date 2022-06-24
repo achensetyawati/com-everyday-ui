@@ -193,6 +193,7 @@ export class DataForm {
     removeItem(item) {
         var itemIndex = this.data.items.indexOf(item);
         this.data.items.splice(itemIndex, 1);
+        this.error = null;
     }
 
     // typeChanged(item) {

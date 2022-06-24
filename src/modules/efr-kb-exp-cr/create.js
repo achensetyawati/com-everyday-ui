@@ -44,6 +44,7 @@ export class Create {
                 this.list();
             })
             .catch(e => {
+                alert('Terjadi Kesalahan');
                 // debugger
                 // console.log(this.error);
                 // this.error = e;
