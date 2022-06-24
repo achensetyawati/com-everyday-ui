@@ -56,6 +56,8 @@ export class Edit {
           this.error["storage"] = e.storage;
         if (e.items)
           this.error["items"] = e.items;
+
+          alert('Terjadi Kesalahan');
       });
   }
 }
