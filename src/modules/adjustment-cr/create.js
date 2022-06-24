@@ -27,6 +27,7 @@ export class Create {
             })
             .catch(e => {
                 this.error = e;
+                alert('Terjadi Kesalahan');
             })
     }
 }
