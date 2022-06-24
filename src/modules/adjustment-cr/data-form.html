@@ -51,6 +51,7 @@
                 <td> 
                     <au-textbox
                         value.bind="item.item.name"
+                        error.bind="error.items[$index].name"
                         read-only.bind="true"
                         options.bind="controlOptions">
                     </au-textbox>
