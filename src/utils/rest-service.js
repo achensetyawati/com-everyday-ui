@@ -53,7 +53,6 @@ export class RestService {
   }
 
   post(endpoint, data, header) {
-    console.log(data);
     var promise = this.endpoint.post(endpoint, data);
     this.publish(promise);
     return promise

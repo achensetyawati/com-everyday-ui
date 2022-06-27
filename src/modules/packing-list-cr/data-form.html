@@ -64,7 +64,12 @@
     <numeric label="Total Kuantitas:" read-only.bind="true" value.bind="sumTotalQty" class="col-md-5"></numeric>
     <numeric label="Total Harga:" read-only.bind="true" value.bind="sumPrice" class="col-md-3"></numeric>
   </form>
-
+  <div class="form-group" if.bind="error.itemscount">
+    <center>
+      <p if.bind="error.itemscount" class="help-block text-center">${error.itemscount}</p>
+    </center>
+  </div>
+  <br>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
