@@ -44,6 +44,14 @@ export class View {
             er.latitude = "latitude harus angka";
             this.error = er;
         }
+        if(!parseFloat(this.data.salesTarget)){
+          er.salesTarget = "Sales Target harus angka";
+          this.error = er;
+        }
+        if(!parseFloat(this.data.monthlyTotalCost)){
+          er.monthlyTotalCost = "Monthly Total Cost harus angka";
+          this.error = er;
+        }
         if(!er.longitude && !er.latitude){
             this.service.update(this.data)
             .then(result => {
