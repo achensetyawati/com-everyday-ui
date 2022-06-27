@@ -79,7 +79,7 @@ export class Create {
 
                     console.log(result);
 
-                    if (result.status == 404) {
+                    if (result.status == 200) {
                         var getRequest = this.service.endpoint.client.fetch(endpoint, request);
                         this.service._downloadFile(getRequest);
                         this.service.publish(getRequest);
@@ -96,6 +96,7 @@ export class Create {
                         var getRequest = this.service.endpoint.client.fetch(endpoint, request);
                         this.service._downloadFile(getRequest);
                         this.service.publish(getRequest);
+
                         alert("Terjadi kesalahan pada sistem");
                     }
                     else {
@@ -103,6 +104,9 @@ export class Create {
                         this.list();
                     }
                     return Promise.resolve(result);
+                })
+                .catch((e) => {
+                    alert(e.Message);
                 });
         }
     }
