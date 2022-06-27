@@ -243,7 +243,6 @@ export class DataForm {
     }
     
     barcodeView = (item) => {
-      console.log('item',item);
       if (!item.code)
         return `${item.code} - ${item.name}`
       else
@@ -268,8 +267,6 @@ export class DataForm {
             var temp1 = temp[0];
             temp1.sendquantity = 1;
             var data = this.data.items.find((x) => x.item.code === temp1.item.code);
-            console.log(data);
-
             if(!data) {
               this.data.items.push(temp1);
               
@@ -499,6 +496,7 @@ export class DataForm {
     removeItem(item) {
         var itemIndex = this.data.items.indexOf(item);
         this.data.items.splice(itemIndex, 1);
+        this.error.items.splice(itemIndex, 1);
         this.makeTotal(this.data.items);
     }
 

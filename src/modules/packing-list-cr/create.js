@@ -10,7 +10,6 @@ export class Create {
         this.router = router;
         this.service = service;
         this.data = { items: [] };
-        console.log(this.data);
     }
 
     activate(params) {
@@ -25,18 +24,21 @@ export class Create {
         this.data.destinationId = this.data.destination._id;
         this.data.sourceId = this.data.source._id;
 
-        console.log(JSON.stringify(this.data));
         let error = {
             items : []
         }
         for(let i = 0; i < this.data.items.length; i++){
             let d = this.data.items[i];
-            if(d.sendquantity == 0 || d.quantity == 0){
-                const errObj = {
-                    quantity: 'Jumlah barang yang dikirim harus lebih besar dari 0'
-                }
+            var errObj ={}
+            if(d.quantity < d.sendquantity){
+                errObj.quantity= 'Jumlah barang yang dikirim tidak boleh lebih besar dari jumlah stok';
                 error.items.push(errObj);
             }
+            else if(d.quantity == 0){
+                errObj.quantity= 'Jumlah barang yang dikirim harus lebih besar dari 0';
+                error.items.push(errObj);
+            }
+            console.log(error.items, d)
         }
 
         if(error.items.length > 0){
