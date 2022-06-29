@@ -1,4 +1,4 @@
-import { inject, Lazy } from 'aurelia-framework';
+import { inject, Lazy, bindable } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { Service } from './service';
 var StorageLoader = require('../../../loader/nstorage-loader');
@@ -6,6 +6,7 @@ import moment from 'moment';
 
 @inject(Router, Service)
 export class Report {
+    @bindable storage;
     storage = {};
 
     dateFrom = new Date();
@@ -76,7 +77,7 @@ export class Report {
             dateTo: this.dateTo.format('YYYY-MM-DD'),
             transaction: this.transactionType.id || 0,
             status: this.packingListStatus.isDistributed || false,
-            destinationCode: this.storage.code || '',
+            destinationCode: this.storage? this.storage.code : '',
             packingList: this.packingListNo
         }
         this.service.generateExcel(filter);
@@ -91,7 +92,7 @@ export class Report {
             dateTo: this.dateTo.format('YYYY-MM-DD'),
             transaction: this.transactionType.id || 0,
             status: this.packingListStatus.isDistributed || false,
-            destinationCode: this.storage.code || '',
+            destinationCode: this.storage? this.storage.code : '',
             packingList: this.packingListNo
         }
         this.service.search(filter).then(spkDocs => {
