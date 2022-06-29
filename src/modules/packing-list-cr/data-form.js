@@ -487,6 +487,8 @@ export class DataForm {
         } 
     }
 
+    
+
     addItem() {
         var item = {};
         item.articleVariantId = '';
@@ -496,7 +498,8 @@ export class DataForm {
     removeItem(item) {
         var itemIndex = this.data.items.indexOf(item);
         this.data.items.splice(itemIndex, 1);
-        this.error.items.splice(itemIndex, 1);
+        if(this.error)
+          this.error.items.splice(itemIndex, 1);
         this.makeTotal(this.data.items);
     }
 
