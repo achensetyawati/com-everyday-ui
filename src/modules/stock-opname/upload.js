@@ -85,7 +85,7 @@ export class Create {
                         this.service.publish(getRequest);
                         alert("Upload gagal!\n Ada beberapa data yang harus diperbaiki");
                     }
-                    else if (result.status == 400) {
+                    else if (result.status == 400 || result.status == 404) {
                         alert("Urutan format kolom CSV tidak sesuai.\n Format: Barcode, Nama Barang, Kuantitas Stock");
                         this.list();
                     }
