@@ -74,4 +74,11 @@ export class List {
     view(data) { 
         this.router.navigateToRoute('view', { storageId: data.StorageId, itemCode: data.ItemCode });
     } 
+
+    options = {
+        search: false,
+        showToggle: false,
+        showColumns: false,
+        undefinedText: '0'
+    };
 }
