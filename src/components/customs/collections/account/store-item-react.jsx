@@ -23,7 +23,9 @@ export default class StoreItemReact extends React.Component {
             this.props.onChange(store);
     }
 
-    handleRemove() {
+    handleRemove(e) {
+        e.preventDefault();
+        
         if (this.props.onRemove)
             this.props.onRemove(this.state.value);
     }

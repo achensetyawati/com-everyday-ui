@@ -14,6 +14,13 @@ export class List {
         this.filter = "";  
     }
 
+    tableOptions = {
+        search: false,
+        showToggle: false,
+        showColumns: false,
+        sortable: false
+    };
+
     async activate() { 
     }
 

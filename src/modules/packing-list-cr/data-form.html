@@ -64,7 +64,12 @@
     <numeric label="Total Kuantitas:" read-only.bind="true" value.bind="sumTotalQty" class="col-md-5"></numeric>
     <numeric label="Total Harga:" read-only.bind="true" value.bind="sumPrice" class="col-md-3"></numeric>
   </form>
-
+  <div class="form-group" if.bind="error.itemscount">
+    <center>
+      <p if.bind="error.itemscount" class="help-block text-center">${error.itemscount}</p>
+    </center>
+  </div>
+  <br>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -94,12 +99,12 @@
           <div class="form-group ${error.items[$index].sendquantity?'has-error':''}">
             <input class="form-control" type="number" name="sendquantity" value.bind="item.sendquantity"
               max.bind="item.quantity" min="0"
-              change.delegate="qtyChange(item.item.code, item.sendquantity, item.item.domesticCOGS)" />
+              change.delegate="qtyChange(item.item.code, item.sendquantity, item.item.domesticSale)" />
             <span class="help-block">${error.items[$index].quantity}</span>
           </div>
         </td>
         <td>
-          <numeric label="" read-only.bind="true" value.bind="item.item.domesticCOGS" class="col-md-1"></numeric>
+          <numeric label="" read-only.bind="true" value.bind="item.item.domesticSale" class="col-md-1"></numeric>
         </td>
         <td>
           <div class="form-group ${error.items[$index].remark?'has-error':''}">

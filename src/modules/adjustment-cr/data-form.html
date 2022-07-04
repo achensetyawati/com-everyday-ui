@@ -76,6 +76,7 @@
                 <td> 
                     <au-numeric 
                         value.bind="item.qtyAdjustment" 
+                        format="0" 
                         error.bind="error.items[$index].qtyAdjustment"
                         read-only.bind="readOnly"
                         options.bind="controlOptions">

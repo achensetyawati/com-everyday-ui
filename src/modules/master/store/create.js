@@ -30,13 +30,41 @@ export class Create {
   }
 
   saveCallback(event) {
-    this.service.create(this.data)
-      .then(result => {
-        alert("Data berhasil dibuat");
-        this.router.navigateToRoute('create', {}, { replace: true, trigger: true });
-      })
-      .catch(e => {
-        this.error = e;
-      })
+    var er={};
+    if(!parseFloat(this.data.longitude)){
+      if(this.data.longitude!="0"){
+        er.longitude = "longitude harus angka";
+        this.error = er;
+      }
+    }
+    
+    if(!parseFloat(this.data.latitude)){
+      if(this.data.latitude!="0"){
+        er.latitude = "latitude harus angka";
+        this.error = er;
+      }
+    }
+    if(!parseFloat(this.data.salesTarget) || this.data.salesTarget!=0){
+      if(this.data.salesTarget!="0"){
+        er.salesTarget = "Sales Target harus angka";
+        this.error = er;
+      }
+    }
+    if(!parseFloat(this.data.monthlyTotalCost)){
+      if(this.data.monthlyTotalCost!="0"){
+        er.monthlyTotalCost = "Monthly Total Cost harus angka";
+        this.error = er;
+      }
+    }
+    if(!er.monthlyTotalCost && !er.salesTarget && !er.latitude&& !er.longitude){
+      this.service.create(this.data)
+        .then(result => {
+          alert("Data berhasil dibuat");
+          this.router.navigateToRoute('create', {}, { replace: true, trigger: true });
+        })
+        .catch(e => {
+          this.error = e;
+        })
+    }
   }
 }
