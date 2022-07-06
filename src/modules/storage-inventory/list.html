@@ -9,7 +9,7 @@
                             <au-autocomplete value.bind="storage" error.bind="error.storage" label="Penyimpanan" loader.one-time="storageLoader"
                                 placeholder="Penyimpanan" options.bind="controlOptions" read-only.bind="readOnly">
                             </au-autocomplete>
-                            <au-textbox                label="filter"          value.bind="filter"  read-only.bind="readOnly"></au-textbox> 
+                            <au-textbox label="filter" value.bind="filter" read-only.bind="readOnly" placeholder="masukan nama barang / ro / barcode"></au-textbox> 
                         </div>
                     </div>
                 <!-- </div> -->
@@ -22,7 +22,7 @@
                 </div>
             </div>
         <!-- </div> -->
-        <!-- <storage-auto-suggest   label="Penyimpanan"     value.bind="storage"      error.bind="error.storage"     read-only.bind="readOnly"   ></storage-auto-suggest> -->
+        <!-- <storage-auto-suggest label="Penyimpanan" value.bind="storage" error.bind="error.storage" read-only.bind="readOnly"></storage-auto-suggest> -->
         
     </form> 
     <table class="table table-bordered table-hover">
@@ -51,6 +51,8 @@
                 <th>Subtotal</th>
             </tr> -->
         </thead>
+        
+    </table>
         <!-- <tbody>
             <tr repeat.for="item of data" click.delegate="view(item)">
                 <td>${item.ItemCode}</td>
@@ -68,9 +70,9 @@
             columns.bind="columns" 
             page-size="15" 
             context.bind="detail" 
-            context-click.delegate="contextCallback($event)">
+            context-click.delegate="contextCallback($event)"
+            options.bind="options">
         </au-table>
-    </table>
     <!-- <div class="alert alert-info text-center" role="alert" if.bind="data.length == 0">
        Tidak ada data.
     </div> -->

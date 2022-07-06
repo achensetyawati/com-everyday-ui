@@ -76,13 +76,16 @@ export class Create {
                     //     this.service.publish(getRequest);
                     //     alert("Upload gagal!\n Ada beberapa data yang harus diperbaiki");
                     // }
-                    if (result.status == 404) {
+
+                    console.log(result);
+
+                    if (result.status == 200) {
                         var getRequest = this.service.endpoint.client.fetch(endpoint, request);
                         this.service._downloadFile(getRequest);
                         this.service.publish(getRequest);
                         alert("Upload gagal!\n Ada beberapa data yang harus diperbaiki");
                     }
-                    else if (result.status == 400) {
+                    else if (result.status == 400 || result.status == 404) {
                         alert("Urutan format kolom CSV tidak sesuai.\n Format: Barcode, Nama Barang, Kuantitas Stock");
                         this.list();
                     }
@@ -93,6 +96,7 @@ export class Create {
                         var getRequest = this.service.endpoint.client.fetch(endpoint, request);
                         this.service._downloadFile(getRequest);
                         this.service.publish(getRequest);
+
                         alert("Terjadi kesalahan pada sistem");
                     }
                     else {
@@ -100,6 +104,9 @@ export class Create {
                         this.list();
                     }
                     return Promise.resolve(result);
+                })
+                .catch((e) => {
+                    alert(e.Message);
                 });
         }
     }

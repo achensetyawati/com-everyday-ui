@@ -37,6 +37,10 @@ export class Create {
                 alert('Berat tidak boleh 0');
                 return;
             }
+            if(this.data.items[i].spkDocsViewModel.Weight==0){
+                this.data.items[i].spkDocsViewModel.Weight=this.data.items[i].weight;
+            }
+            console.log(this.data.items[i].spkDocsViewModel.Weight)
         }
         
         this.service.create(this.data)
@@ -44,6 +48,7 @@ export class Create {
                 this.list();
             })
             .catch(e => {
+                alert('Terjadi Kesalahan');
                 // debugger
                 // console.log(this.error);
                 // this.error = e;

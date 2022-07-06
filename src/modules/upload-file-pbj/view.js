@@ -12,6 +12,7 @@ export class View {
 
     activate(params) {
         var id = params.id;
+        console.log(params);
         this.service.getById(id)
             .then(data => {
                 this.data = data;

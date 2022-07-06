@@ -45,6 +45,10 @@ export class DataForm {
                 name: this.data.name
             }
         }
+        this.data.longitude= this.data.longitude || 0;
+        this.data.latitude= this.data.latitude || 0;
+        this.data.salesTarget= this.data.salesTarget || 0;
+        this.data.monthlyTotalCost= this.data.monthlyTotalCost || 0;
     }
 
     selectedStorageChanged(newValue){

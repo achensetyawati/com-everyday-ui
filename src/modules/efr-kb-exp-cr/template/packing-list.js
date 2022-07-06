@@ -30,6 +30,7 @@ export class PackingList {
 
     async packingListChangeCallback(e) {
         if (this.data.spkDocsViewModel) {
+            this.data.spkDocsViewModel.Weight=this.data.weight;
             var qty = 0;
             console.log(this.data);
             var temp = this.data.spkDocsViewModel;

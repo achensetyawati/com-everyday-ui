@@ -35,14 +35,42 @@ export class View {
     }
 
     saveCallback(event) {
-
-        this.service.update(this.data)
+        var er={};
+        if(!parseFloat(this.data.longitude)){
+            if(this.data.longitude!="0"){
+              er.longitude = "longitude harus angka";
+              this.error = er;
+            }
+          }
+          
+          if(!parseFloat(this.data.latitude)){
+            if(this.data.latitude!="0"){
+              er.latitude = "latitude harus angka";
+              this.error = er;
+            }
+          }
+          if(!parseFloat(this.data.salesTarget) || this.data.salesTarget!=0){
+            if(this.data.salesTarget!="0"){
+              er.salesTarget = "Sales Target harus angka";
+              this.error = er;
+            }
+          }
+          if(!parseFloat(this.data.monthlyTotalCost)){
+            if(this.data.monthlyTotalCost!="0"){
+              er.monthlyTotalCost = "Monthly Total Cost harus angka";
+              this.error = er;
+            }
+          }
+        if(!er.monthlyTotalCost && !er.salesTarget && !er.latitude&& !er.longitude){
+            this.service.update(this.data)
             .then(result => {
                 this.cancelCallback();
             })
             .catch(e => {
                 this.error = e;
             })
+        }
+        
     }
 
 }
