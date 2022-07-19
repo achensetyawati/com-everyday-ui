@@ -48,16 +48,20 @@ export class Create {
                 this.list();
             })
             .catch(e => {
-                alert('Terjadi Kesalahan');
-                // debugger
-                // console.log(this.error);
-                // this.error = e;
-
-                // for (var item in e.spkDocuments) {
-                //     this.error.spkDocuments[item].code = e.spkDocuments[item].code;
+                alert('Terjadi Kesalahan.Cek Inputan yang belum diisi');
+                 
+                console.log(e);
+                // for (var item of e.items) {
+                //     for (var d of item.details) {
+                //         this.error =d; 
+                   
+                //     }
+                //    // this.error.spkDocuments[item].remark = e.spkDocuments[item].remark;
                 // }
-                // console.log(this.error);
-                this.error = e;
+              
+                // this.error = e;
+                
+
             })
     }
 }
