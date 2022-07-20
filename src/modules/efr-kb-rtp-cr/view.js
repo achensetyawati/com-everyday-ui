@@ -29,6 +29,7 @@ export class View {
                 this.service.getSPKByReference(this.data.code).then(spk => {
                     this.data.spk = spk;
                 })
+                console.log(this.data);
             })
     }
 
