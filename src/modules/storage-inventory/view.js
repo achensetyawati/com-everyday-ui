@@ -31,18 +31,13 @@ export class View {
         var storageId = params.storageId;
         var itemCode = params.itemCode; 
         var result = await this.service.getAllMovement(storageId, itemCode, this.info);
+        console.log(result);
         this.data = result;
         this.info = result.info;
         var moment = require('moment');
         for (var obj of this.data) {
             obj.Date = moment(obj.Date, "YYYY-MM-DDTHH:mm:SSSZ").format("DD MMM YYYY - HH:mm:SS")
-            if(obj.Type === "OUT")
-                    {
-                        obj.Quantity = -obj.Quantity;
-                    }
-                  
         }
-        console.log( this.data );
     }
 
     loadPage() {
@@ -56,8 +51,7 @@ export class View {
                 this.info = result.info;
                 var moment = require('moment');
                 for (var obj of this.data) {
-                    
-                    obj.Date = moment(obj.Date, "YYYY-MM-DDTHH:mm:SSSZ").format("DD MMM YYYY - HH:mm:SS");
+                    obj.Date = moment(obj.Date, "YYYY-MM-DDTHH:mm:SSSZ").format("DD MMM YYYY - HH:mm:SS")
                 }
             })
     }
