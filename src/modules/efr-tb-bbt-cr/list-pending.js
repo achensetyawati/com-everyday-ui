@@ -84,7 +84,7 @@ export class Pending {
         }
         this.info.keyword = '';
         this.info.destinationName = destinations;
-        console.log(destinations);
+        
         var result = await this.service.listPending(this.info);
         // var resultWithReference = await result.data.map(item => {
 
