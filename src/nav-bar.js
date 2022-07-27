@@ -1,6 +1,3 @@
-
-
-
 import { inject, Aurelia, BindingEngine, computedFrom } from 'aurelia-framework';
 import { AuthService } from 'aurelia-authentication';
 import { Router } from 'aurelia-router';
@@ -20,15 +17,11 @@ export class NavBar {
     }
 
     attached() {
-
-
-
         this.stores = [];
         var storage = this.authService.authentication.storage;
         if (storage.get("me")) {
             this.stores = JSON.parse(storage.get("me")).data.stores;
         }
-
 
         this.bindingEngine.propertyObserver(this, "storeId").subscribe((newValue, oldValue) => {
             for (var store of this.stores) {
@@ -40,11 +33,6 @@ export class NavBar {
             }
         });
     }
-
-
-
-
-
 
     @computedFrom('authService.authenticated')
     get isAuthenticated() {

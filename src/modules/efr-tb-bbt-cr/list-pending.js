@@ -1,20 +1,52 @@
-import { inject, Lazy } from 'aurelia-framework';
+import { inject, Lazy, Aurelia, BindingEngine } from 'aurelia-framework';
+import { AuthService } from "aurelia-authentication";
 import { Router } from 'aurelia-router';
 import { Service } from './service';
+import { LocalStorage } from '../../utils/storage';
+
 var tranferOutLoader = require('../../loader/transfer-out-loader');
 
-@inject(Router, Service)
+@inject(Aurelia, Router, BindingEngine, Service, AuthService, LocalStorage)
 export class Pending {
     data = [];
     info = {
       page: 1,
-      keyword: ''
+      keyword: '',
+   
     };
+
+    stores = [];
+    filters = [];
+    
     keyword = '';
-    constructor(router, service) {
+    constructor(aurelia, router, bindingEngine, service, authService, localStorage) {
+        this.aurelia = aurelia;
+        this.bindingEngine = bindingEngine;
         this.router = router;
         this.service = service;
+        this.localStorage = localStorage;
+        this.storeId = this.localStorage.store._id;
+        this.authService = authService;
+
+        this.user = this.localStorage.me;
     }
+
+    attached() {
+        var storage = this.authService.authentication.storage;
+        if (storage.get("me")) {
+            this.stores = JSON.parse(storage.get("me")).data.stores;
+        }
+
+        if (this.stores.length > 0) {
+            for(var i in this.stores) {
+                //this.filters.push(JSON.stringify('DestinationName.Contains("'+this.stores[i].name+'"): "true"',));
+                //console.log(JSON.stringify('DestinationName.Contains(""):'));
+            }
+        }
+
+        console.log(this.filters);
+    }
+
 
     // activate() {
     //     this.service.listPending()
