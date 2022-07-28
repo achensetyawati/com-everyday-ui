@@ -49,28 +49,28 @@ export class Pending {
 
 
     async activate() {
-        var destinations;
-        var storage = this.authService.authentication.storage;
+        // var destinations;
+        // var storage = this.authService.authentication.storage;
       
-        if (storage.get("me")) {
-            this.stores = JSON.parse(storage.get("me")).data.stores;
-        }
+        // if (storage.get("me")) {
+        //     this.stores = JSON.parse(storage.get("me")).data.stores;
+        // }
 
-        if (this.stores.length > 0) {
-            for(var i in this.stores) {
-                if(i==0)
-                {
-                    destinations =this.stores[i].code +";" ;
-                 }
-                else
-                {
-                    destinations +=this.stores[i].code +';';
-                }
+        // if (this.stores.length > 0) {
+        //     for(var i in this.stores) {
+        //         if(i==0)
+        //         {
+        //             destinations =this.stores[i].code +";" ;
+        //          }
+        //         else
+        //         {
+        //             destinations +=this.stores[i].code +';';
+        //         }
                
-            }
-        }
+        //     }
+        // }
         this.info.keyword = '';
-        this.info.destinationName = destinations;
+        //this.info.destinationName = destinations;
        
         var result = await this.service.listPending(this.info);
         // var resultWithReference = await result.data.map(item => {
