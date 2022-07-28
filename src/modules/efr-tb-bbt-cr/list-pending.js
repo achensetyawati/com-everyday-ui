@@ -48,21 +48,12 @@ export class Pending {
     }
 
 
-    // activate() {
-    //     this.service.listPending()
-    //         .then(data => {
-    //             this.data = data;
-    //         })
-    // }
-
     async activate() {
-        
         var destinations;
         var storage = this.authService.authentication.storage;
       
         if (storage.get("me")) {
             this.stores = JSON.parse(storage.get("me")).data.stores;
-           
         }
 
         if (this.stores.length > 0) {
