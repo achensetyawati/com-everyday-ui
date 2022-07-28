@@ -37,14 +37,14 @@ export class Pending {
             this.stores = JSON.parse(storage.get("me")).data.stores;
         }
 
-        if (this.stores.length > 0) {
-            for(var i in this.stores) {
-                //this.filters.push(JSON.stringify('DestinationName.Contains("'+this.stores[i].name+'"): "true"',));
-                //console.log(JSON.stringify('DestinationName.Contains(""):'));
-            }
-        }
+        // if (this.stores.length > 0) {
+        //     for(var i in this.stores) {
+        //         //this.filters.push(JSON.stringify('DestinationName.Contains("'+this.stores[i].name+'"): "true"',));
+        //         //console.log(JSON.stringify('DestinationName.Contains(""):'));
+        //     }
+        // }
 
-        console.log(this.filters);
+        // console.log(this.stores);
     }
 
 
@@ -64,10 +64,6 @@ export class Pending {
             this.stores = JSON.parse(storage.get("me")).data.stores;
            
         }
- 
-
-        console.log(this.stores);
-        
 
         if (this.stores.length > 0) {
             for(var i in this.stores) {
@@ -84,7 +80,7 @@ export class Pending {
         }
         this.info.keyword = '';
         this.info.destinationName = destinations;
-        
+       
         var result = await this.service.listPending(this.info);
         // var resultWithReference = await result.data.map(item => {
 
