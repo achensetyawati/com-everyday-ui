@@ -278,9 +278,9 @@ export class DataForm {
             this.makeTotal(this.data.items);
           }
         }
-      }
 
-      this.item = "";
+        this.barcode = "";
+      }
 
     }
 
