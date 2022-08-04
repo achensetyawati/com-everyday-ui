@@ -36,15 +36,6 @@ export class Pending {
         if (storage.get("me")) {
             this.stores = JSON.parse(storage.get("me")).data.stores;
         }
-
-        // if (this.stores.length > 0) {
-        //     for(var i in this.stores) {
-        //         //this.filters.push(JSON.stringify('DestinationName.Contains("'+this.stores[i].name+'"): "true"',));
-        //         //console.log(JSON.stringify('DestinationName.Contains(""):'));
-        //     }
-        // }
-
-        // console.log(this.stores);
     }
 
 
