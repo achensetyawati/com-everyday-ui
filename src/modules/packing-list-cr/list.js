@@ -31,7 +31,7 @@ export class List {
         { field: 'packingList', title: 'Nomor Packing List'},
         { field: 'SourceName', title: 'Sumber Penyimpanan'},
         { field: 'DestinationName', title: 'Tujuan Penyimpanan' },
-        { field: '_createdDate', title: 'Tanggal Kirim',
+        { field: 'date', title: 'Tanggal Kirim',
         formatter: (value, data) => {
             return moment(value).locale(locale).format("DD MMMM YYYY");
         }
