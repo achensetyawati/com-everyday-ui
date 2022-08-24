@@ -37,11 +37,11 @@
           options.bind="controlOptions">
         </au-dropdown>
 
-        <au-checkbox
+        <!-- <au-checkbox
           label="Manual?"
           value.bind="manual"
           options.bind="controlOptions">
-        </au-checkbox>
+        </au-checkbox> -->
 
         <au-textbox
           label="Barcode"
@@ -77,7 +77,6 @@
           loader.bind="itemLoader" 
           text.bind="itemView" 
           placeholder="cari Barang" 
-          if.bind="!manual"
           key="Name"
           read-only.bind="readOnly || isEdit" 
           options.bind="controlOptions">
