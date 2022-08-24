@@ -11,7 +11,7 @@ export class DataForm {
     @bindable item;
     @bindable barcode
 
-    manual;
+    manual = true;
     dataSource = {};
     sources = [];
     destinations = [];

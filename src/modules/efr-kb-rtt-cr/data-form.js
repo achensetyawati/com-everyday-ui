@@ -10,7 +10,7 @@ export class DataForm {
     @bindable source;
     @bindable item;
 
-    manual;
+    manual = true;
     dataSource = {};
     sources = [];
     destinations = [];
