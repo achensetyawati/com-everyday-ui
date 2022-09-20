@@ -9,7 +9,7 @@ const serviceUriStorages = 'inventories/monitoring';
 export class Service extends RestService{
   
   constructor(http, aggregator, config, api) {
-    super(http, aggregator, config, "master");
+    super(http, aggregator, config, "inventory");
   }  
   
   getAllInventory(storageId, keyword) {
