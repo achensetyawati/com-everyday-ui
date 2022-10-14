@@ -102,7 +102,6 @@ export class Report {
 
         this.service.getMovement(args)
             .then(results => {
-console.log(results);
                 var rowDate=[];
                 var rowStorageDate=[];
                 var rowItemStorageDate=[];
@@ -120,7 +119,6 @@ console.log(results);
                     var source = a.SourceName.toString();
                     var destination = a.DestinationName.toString();
                     var itemCode = a.ItemCode.toString();
-                    console.log(rowDate[date],date)
 
                     if(!rowDate[date]){
                         index++;
@@ -146,24 +144,20 @@ console.log(results);
                     }
                 }
 
-                console.log(rowItemStorageDate[date+source+destination+itemCode])
                 for(var b of results.data) {
-                    console.log(b)
 
                     let date = results.data.find(o => o.Date == b.Date);
-console.log(date)
                         if(date){
                             date.datespan = rowDate[b.Date];
                         }
 
                     let storageCode = results.data.find(o => o.Date + o.SourceName + o.DestinationName == b.Date + b.SourceName + b.DestinationName);
-                    console.log(storageCode)           
+                               
                         if(date && storageCode){
                             storageCode.storagespan = rowStorageDate[b.Date+ b.SourceName + b.DestinationName];
                         }
                     let itemCode = results.data.find(o => o.Date + o.SourceName + o.DestinationName + o.ItemCode == b.Date + b.SourceName + b.DestinationName + b.ItemCode);
-                    
-                    console.log(itemCode) 
+                     
                         if(date&&itemCode&&storageCode){
                             itemCode.itemspan = rowItemStorageDate[b.Date+ b.SourceName + b.DestinationName +b.ItemCode];
                         }
@@ -173,7 +167,6 @@ console.log(date)
 
                 this.usedMonth = month;
                 this.usedYear = year;
-console.log(this.data)
             })
             .catch(e => {
                 this.error = e;
