@@ -57,7 +57,6 @@ module.exports = [
         settings: {
             group: "toko",
             permission: { "C.01":1,"SA.01":1,"ON.01":1,"PU.01":1,"VIP.01":1,"CN.01":1 },
-            //permission: { "C.01":1,"GP.01":1,"SA.01":1,"ON.01":1,"PU.01":1,"VIP.01":1,"CN.01":1 },
             iconClass: 'fa fa-shopping-bag'
         }
     },
@@ -71,7 +70,6 @@ module.exports = [
         settings: {
             group: "toko",
             permission: { "C.01":1,"SA.01":1,"ON.01":1,"PU.01":1,"VIP.01":1,"CN.01":1 },
-            //permission: { "C.01":1,"GP.01":1,"SA.01":1,"ON.01":1,"PU.01":1,"VIP.01":1,"CN.01":1 },
             iconClass: 'fa fa-bank'
         }
     }]

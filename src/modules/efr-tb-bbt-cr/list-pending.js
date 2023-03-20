@@ -19,6 +19,8 @@ export class Pending {
     filters = [];
     
     keyword = '';
+    destinations = '';
+
     constructor(aurelia, router, bindingEngine, service, authService, localStorage) {
         this.aurelia = aurelia;
         this.bindingEngine = bindingEngine;
@@ -40,7 +42,7 @@ export class Pending {
 
 
     async activate() {
-        var destinations;
+        
         var storage = this.authService.authentication.storage;
       
         if (storage.get("me")) {
@@ -51,17 +53,17 @@ export class Pending {
             for(var i in this.stores) {
                 if(i==0)
                 {
-                    destinations =this.stores[i].code +";" ;
-                 }
+                    this.destinations =this.stores[i].code +";" ;
+                }
                 else
                 {
-                    destinations +=this.stores[i].code +';';
+                    this.destinations +=this.stores[i].code +';';
                 }
                
             }
         }
         this.info.keyword = '';
-        this.info.destinationName = destinations;
+        this.info.destinationName = this.destinations;
        
         var result = await this.service.listPending(this.info);
         // var resultWithReference = await result.data.map(item => {
@@ -117,6 +119,7 @@ export class Pending {
     changePage(e) {
         var page = e.detail;
         this.info.page = page;
+        this.info.destinationName = this.destinations;
         this.loadPage();
     }
 
