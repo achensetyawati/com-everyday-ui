@@ -7,9 +7,6 @@ export class Login {
     username = "dev";
     password = "Standar123";
 
-    // username="";
-    // password="";
-
     constructor(aurelia, authService) {
         this.aurelia = aurelia;
         this.authService = authService;
@@ -21,8 +18,6 @@ export class Login {
                 console.log("success logged " + response);
                 this.authService.getMe()
                     .then(account => {
-                        // this.session.token = token;
-                        // this.session.data = account;
                         if (account) {
                             this.authService.authentication.storage.set("me", JSON.stringify(account));
                         } else {
