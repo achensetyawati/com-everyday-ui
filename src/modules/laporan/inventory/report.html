@@ -1,0 +1,73 @@
+<template>
+    <au-input-form title.bind="title" with.bind="context">
+      <style>
+          table>tbody>tr>td {
+              white-space: pre;
+          }
+      </style>
+  
+      <h1 class="page-header">Monitoring Inventory</h1>
+  
+      <form class="form-horizontal">
+        <au-autocomplete 
+            value.bind="storage" 
+            label="Storage Name" 
+            loader.bind="storageLoader"
+            placeholder="Cari Nama Storage" 
+            read-only.bind="readOnly" 
+            text.bind="storageView"
+            options.bind="controlOptions">
+        </au-autocomplete>
+  
+        <au-dropdown label="Quantity" value.bind="selectedQuantity"  read-only.bind="readOnly"
+        items.bind="quantities"></au-dropdown>
+  
+        <div class="form-group">
+            <label for="contact" class="col-sm-6 control-label"></label>
+            <div class="col-sm-3">
+                <button click.delegate="searching()" class='btn btn-success'>Cari</button>
+                <button click.delegate="reset()" class='btn btn-success'>Reset</button>
+            </div>
+        </div>
+  
+        <div class="btn-group pull-left">
+            <a click.delegate="ExportToExcel()" class='btn btn-primary'>Excel</a>
+        </div>
+    </form>
+    <br>
+  </br>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" border="1" id="myTable">
+          <thead align="center">
+              <tr>
+                <td>Item Code</td>
+                <td>Item Name</td>
+                <td>Item Domestic Sale</td>
+                <td>Quantity</td>
+                <td>Date</td>
+                <td>Storage Code</td>
+                <td>Storage Name</td>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- <require from="../../../lib/number-format-value-converter"></require> -->
+              <tr repeat.for="item of data">
+                <td class="text-left">${item.ItemCode}</td>
+                <td class="text-left">${item.ItemName}</td>
+                <td class="text-right">${item.ItemDomesticSale}</td>
+                <td class="text-right">${item.Quantity}</td>
+                <td class="text-center">${item.Date}</td>
+                <td class="text-left">${item.StorageCode}</td>
+                <td class="text-left">${item.StorageName}</td>
+              </tr>
+             
+          </tbody>
+      </table>
+  </div>
+  <div class="alert alert-info text-center" role="alert" if.bind="data.length === 0">
+    Tidak ada data.
+</div>
+
+<pagination if.bind="info.total>info.size" info.bind="info" change.delegate="changePage($event)" id="pager"></pagination>
+<hr/>
+  </template>
