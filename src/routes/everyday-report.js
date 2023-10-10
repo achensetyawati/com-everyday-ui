@@ -25,5 +25,18 @@ module.exports=[
 			permission: { "C.01": 1, "MRD.01": 1 },
             iconClass: "fa fa-dashboard",
         }
+    },{
+        route: 'laporan-penjualan',
+        name: 'laporan-penjualan',
+        moduleId: './modules/laporan/sales/index',
+        nav: true,
+        title: 'Laporan Penjualan',
+        auth: true,
+        settings: {
+            group: "everyday shop",
+            subGroup: "Report",
+			permission: { "C.01": 1, "MRD.01": 1 },
+            iconClass: "fa fa-dashboard",
+        }
     }
 ]
