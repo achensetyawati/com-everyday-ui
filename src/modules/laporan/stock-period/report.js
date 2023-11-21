@@ -13,7 +13,7 @@ export class List {
     }
     info = {
         page:1,
-        size:25,
+        size:100,
     };
 
     bind(context) {
@@ -26,43 +26,37 @@ export class List {
         pagination: true
     }
     columns = [
-        { field: "ItemCode", title: "Barcode", valign: "top" },
+        { field: "Brand", title: "Org", valign: "top" },
         { field: "Brand", title: "Brand", valign: "top" },
-        { field: "Date", title: "Transaction Date", valign: "top" },
+        { field: "Barcode", title: "Barcode", valign: "top" },
         { field: "Category", title: "Category",  valign: "top"},
         { field: "Collection", title: "Collection", valign: "top" },
         { field: "SeasonCode", title: "Season Code", valign: "top" },
         { field: "SeasonYear", title: "Season Year", valign: "top" },
         { field: "ItemArticleRealizationOrder", title: "RO/Article", valign: "top" },
-        { field: "ItemName", title: "Name", valign: "top" },
+        { field: "ItemName", title: "Nama", valign: "top" },
         { field: "Color", title: "Color", valign: "top" },
         { field: "Size", title: "Size", valign: "top" },
         { field: "Quantity", title: "Qty", valign: "top" },
+        { field: "ReceivedDate", title: "Received Date", valign: "top" },
+        { field: "Month", title: "Month", valign: "top" },
+        { field: "Year", title: "Year", valign: "top" },
+        { field: "Description", title: "Description", valign: "top" },
         { field: "Location", title: "Location", valign: "top" },
         { field: "OriginalCost", title: "Original Cost", valign: "top" },
-        //{ field: "", title: "Landed Cost", valign: "top" },
         { field: "Gross", title: "Gross", valign: "top" },
-        { field: "Nett", title: "Nett", valign: "top" },
-        { field: "Discount1", title: "Disc %", valign: "top" },
-        { field: "Discount2", title: "Disc2 %", valign: "top" },
-        { field: "DiscountNominal", title: "Disc Nominal", valign: "top" },
-        { field: "SpecialDiscount", title: "Disc Special", valign: "top" },
-        //{ field: "", title: "Disc Name", valign: "top" },
         { field: "TotalOriCost", title: "Total Original Cost", valign: "top" },
-        //{ field: "", title: "Total Landed Cost", valign: "top" },
         { field: "TotalGross", title: "Total Gross", valign: "top" },
-        { field: "TotalNett", title: "Total Nett", valign: "top" },
-        { field: "Margin", title: "Margin", valign: "top" },
     ];
     
     ExportToExcel() {
         var info = {
             storage : this.storage ? this.storage._id : "",
-            dateFrom : this.dateFrom ? moment(this.dateFrom).format("YYYY-MM-DD") : "",
+            // dateFrom : this.dateFrom ? moment(this.dateFrom).format("YYYY-MM-DD") : "",
             dateTo : this.dateTo ? moment(this.dateTo).format("YYYY-MM-DD") : ""
       
         }
-        this.service.getSalesExcel(info);
+        this.service.getStockExcel(info);
     }
 
     get storageLoader(){
@@ -83,6 +77,11 @@ export class List {
 
     searching() {
         this.error = {};
+        if(!this.storage){
+            this.error={
+                storage: "Storage harus diisi"
+            };
+        }
         if (Object.getOwnPropertyNames(this.error).length === 0) {
             this.flag = true;
             this.Table.refresh();
@@ -97,12 +96,12 @@ export class List {
                 page: parseInt(info.offset / info.limit, 10) + 1,
                 size: info.limit,
                 storage : this.storage ? this.storage._id : "",
-                dateFrom : this.dateFrom ? moment(this.dateFrom).format("YYYY-MM-DD") : "",
+                // dateFrom : this.dateFrom ? moment(this.dateFrom).format("YYYY-MM-DD") : "",
                 dateTo : this.dateTo ? moment(this.dateTo).format("YYYY-MM-DD") : ""
             } 
         return this.flag ?
         (
-            this.service.getSales(args)
+            this.service.getStock(args)
             .then(result => {
                 console.log(result)
                 this.data=[];
@@ -117,4 +116,6 @@ export class List {
             })
         ) : { total: 0, data: [] };
     }
+    
 }
+        
