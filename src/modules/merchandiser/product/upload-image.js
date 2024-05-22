@@ -303,47 +303,45 @@ export class Upload {
             }
         }
         
-        
-
         if (Object.keys(e).length > 0) {
             this.error = e;
             console.log(this.error)
         } else {
             
-                        var data = {}
-                        data.dataDestination = this.dataDestination;
-                        data.colorCode = this.color;
-                        data.color = this.data.color;
-                       // data.imagePath = result.data[0];
-                        data.imageFile = this.imageSrc;
-                        // data.motifPath = result.data[1];
-                        // data.realizationOrderName = this.data.realizationOrderName;
-                        data.process = this.data.process;
-                        // data.motifDoc = this.data.motif;
-                        data.seasons = this.data.seasons;
-                        data.materials = this.data.materials;
-                        data.materialCompositions = this.data.materialCompositions;
-                        data.collections = this.data.collections;
-                        data.counters = this.data.counters;
-                        data.subCounters = this.data.subCounters;
-                        data.categories = this.data.categories;
-                        data.ArticleRealizationOrder = this.data.ro;
-                        data.ColorCode = this.data.colorCode;
-                        data.ColorDocName= this.data.ColorDocName;
-                        data.DomesticWholesale= this.data.DomesticWholesale;
-                        data.InternationalCOGS=this.data.InternationalCOGS;
-                        data.InternationalWholesale= this.data.InternationalWholesale;
-                        data.InternationalRetail=this.data.InternationalRetail;
-                        data.InternationalSale= this.data.InternationalSale;
-                        data.Remark= this.data.Remark;
-                        data.Uom= this.data.Uom;
-                        data.Size= this.data.Size;
-                        this.service.updateProductImage(data)
-                            .then(result2 => {
-                                this.list();
-                            }).catch(e => {
-                                this.error = e;
-                            });
+            var data = {}
+            data.dataDestination = this.dataDestination;
+            data.colorCode = this.color;
+            data.color = this.data.color;
+            // data.imagePath = result.data[0];
+            data.imageFile = this.imageSrc;
+            // data.motifPath = result.data[1];
+            // data.realizationOrderName = this.data.realizationOrderName;
+            data.process = this.data.process;
+            // data.motifDoc = this.data.motif;
+            data.seasons = this.data.seasons;
+            data.materials = this.data.materials;
+            data.materialCompositions = this.data.materialCompositions;
+            data.collections = this.data.collections;
+            data.counters = this.data.counters;
+            data.subCounters = this.data.subCounters;
+            data.categories = this.data.categories;
+            data.ArticleRealizationOrder = this.data.ro;
+            data.ColorCode = this.data.colorCode;
+            data.ColorDocName= this.data.ColorDocName;
+            data.DomesticWholesale= this.data.DomesticWholesale;
+            data.InternationalCOGS=this.data.InternationalCOGS;
+            data.InternationalWholesale= this.data.InternationalWholesale;
+            data.InternationalRetail=this.data.InternationalRetail;
+            data.InternationalSale= this.data.InternationalSale;
+            data.Remark= this.data.Remark;
+            data.Uom= this.data.Uom;
+            data.Size= this.data.Size;
+            this.service.updateProductImage(data)
+                .then(result2 => {
+                    this.list();
+                }).catch(e => {
+                    this.error = e;
+                });
         }
 
     }
